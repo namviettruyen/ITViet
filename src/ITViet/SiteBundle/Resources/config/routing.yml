@@ -1,12 +1,36 @@
 _homepage:
-    pattern:  /
+    pattern:  /{_locale}
     defaults: { _controller: ITVietSiteBundle:Top:index }
+    requirements:
+        _scheme: http
+        _locale: en
+_vi_homepage:
+    pattern:  /
+    defaults: { _controller: ITVietSiteBundle:Top:index, _locale: vi }
+    requirements:
+        _scheme: http
 
 _aboutpage:
-    pattern:  /about
+    pattern:  /{_locale}/about
     defaults: { _controller: ITVietSiteBundle:StaticPages:about }
+    requirements:
+        _scheme: http
+        _locale: en
+_vi_aboutpage:
+    pattern:  /about
+    defaults: { _controller: ITVietSiteBundle:StaticPages:about, _locale: vi }
+    requirements:
+        _scheme: http
 
 _contactpage:
-    pattern:  /contact
+    pattern:  /{_locale}/contact
     defaults: { _controller: ITVietSiteBundle:StaticPages:contact }
+    requirements:
+        _scheme: http
+        _locale: en
+_vi_contactpage:
+    pattern:  /lien-he
+    defaults: { _controller: ITVietSiteBundle:StaticPages:contact, _locale: vi }
+    requirements:
+        _scheme: http
 

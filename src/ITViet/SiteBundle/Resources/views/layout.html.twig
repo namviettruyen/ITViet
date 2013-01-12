@@ -1,3 +1,4 @@
+{% set locale = app.request.get('_locale') %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -10,19 +11,33 @@
   <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
-        <div class="container">
+        <div class="container top">
           <a class="brand" href="#">Project</a>
           <div class="nav-collapse collapse">
             {% block navigator %}
             {% endblock %}
             <form class="navbar-form pull-right">
-              <input class="span2" type="text" placeholder="Email">
-              <input class="span2" type="password" placeholder="Password">
-              <button class="btn" type="submit">Sign in</button>
-              <button class="btn btn-primary" type="submit">Sign up</button>
+              <input class="span2" type="text" placeholder="{% trans %}Email{% endtrans %}">
+              <input class="span2" type="password" placeholder="{% trans %}Password{% endtrans %}">
+              <button class="btn" type="submit">{% trans %}Sign in{% endtrans %}</button>
+              <a class="btn btn-primary">{% trans %}Sign up{% endtrans %}</a>
             </form>
-          </div>
-        </div>
+          </div> {# end nav-collapse #}
+        </div> {# end container #}
+
+        {% set pathParams = {
+        'route':app.request.attributes.get('_route'),
+        'args':app.request.attributes.all()|
+        merge(app.request.query.all)}|
+        merge((langAwarePathParams is defined) ? {'langAwareParams':langAwarePathParams} : {}) %}
+
+        <select class="span2 language" onChange="location.href=$(this).val();">
+          {% for item in getPathsForLocales(pathParams) %}
+          <option{% if item.locale == locale %} selected='selected'{% endif %} value='{{ item.path}}'>
+            {{ item.label|trans }}
+          </option>
+          {% endfor %}
+        </select>
       </div>
     </div>
     <div class="container">

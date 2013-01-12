@@ -2,6 +2,8 @@ parameters:
 #    it_viet_site.example.class: ITViet\SiteBundle\Example
 
 services:
-#    it_viet_site.example:
-#        class: %it_viet_site.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    it_viet_site.extension:
+        class: ITViet\SiteBundle\Extension\SiteExtension
+        tags:
+          - { name: twig.extension }
+        arguments: [@service_container]
