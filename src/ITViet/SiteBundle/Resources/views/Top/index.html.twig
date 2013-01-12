@@ -1,0 +1,12 @@
+{% extends 'ITVietSiteBundle::layout.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block navigator %}
+  {% include 'ITVietSiteBundle::navigator.html.twig' with {'active':'home'} %}
+{% endblock %}
+
+{% block maincontents %}
+<h1>Welcome!</h1>
+{{ name }}
+{% endblock %}

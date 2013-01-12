@@ -1,3 +1,12 @@
 _homepage:
     pattern:  /
-    defaults: { _controller: ITVietSiteBundle:Default:index }
+    defaults: { _controller: ITVietSiteBundle:Top:index }
+
+_aboutpage:
+    pattern:  /about
+    defaults: { _controller: ITVietSiteBundle:StaticPages:about }
+
+_contactpage:
+    pattern:  /contact
+    defaults: { _controller: ITVietSiteBundle:StaticPages:contact }
+

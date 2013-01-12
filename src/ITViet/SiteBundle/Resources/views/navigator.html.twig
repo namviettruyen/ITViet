@@ -1,0 +1,5 @@
+<ul class="nav">
+  <li {% if active == 'home' %}class="active"{% endif %}><a href="{{ path('_homepage') }}">Home</a></li>
+  <li {% if active == 'about' %}class="active"{% endif %}><a href="{{ path('_aboutpage') }}">About</a></li>
+  <li {% if active == 'contact' %}class="active"{% endif %}><a href="{{ path('_contactpage') }}">Contact</a></li>
+</ul>

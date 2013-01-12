@@ -1,0 +1,11 @@
+{% extends 'ITVietSiteBundle::layout.html.twig' %}
+
+{% block title %}About{% endblock %}
+
+{% block navigator %}
+  {% include 'ITVietSiteBundle::navigator.html.twig' with {'active':'about'} %}
+{% endblock %}
+
+{% block maincontents %}
+<h1>About!</h1>
+{% endblock %}
