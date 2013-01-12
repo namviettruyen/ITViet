@@ -1,0 +1,11 @@
+app/bootstrap*
+vendor/*
+*/logs/*
+*/cache/*
+web/uploads/*
+web/bundles/*
+
+app/config/parameters.ini
+app/config/parameters.yml
+
+myInfor/*

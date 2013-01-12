@@ -1,0 +1,7 @@
+parameters:
+#    it_viet_site.example.class: ITViet\SiteBundle\Example
+
+services:
+#    it_viet_site.example:
+#        class: %it_viet_site.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
