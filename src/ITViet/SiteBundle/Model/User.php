@@ -210,4 +210,13 @@ abstract class User implements AdvancedUserInterface, \Serializable
 
         return true;
     }
+
+    public function setPassword($password) {
+        $encode = new MessageDigestPasswordEncoder('sha512', true, 10);
+        $hashedPassword = $encode->encodePassword($password, $this->getSalt());
+        $this->hashedPassword = $hashedPassword;
+    }
+    public function setEnabled($enabled){
+        $this->enabled = $enabled;
+    }
 }

@@ -1,0 +1,5 @@
+{% if isAvailable %}
+<div class="email_availability_checker text-success"><span>{% trans %}The email address is still available.{% endtrans %}</span></div>
+{% else %}
+<div class="email_availability_checker text-error"><span>{% trans %}This email address was used.{% endtrans %}</span></div>
+{% endif %}

@@ -1,38 +1,58 @@
 security:
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+        ITViet\SiteBundle\Model\User:
+            algorithm: sha512
+            encode-as-base64: true
+            iterations: 10
 
-    role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+#    role_hierarchy:
+#        ROLE_ADMIN:       ROLE_USER
+#        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
-        in_memory:
-            users:
-                user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+        members:
+            entity: { class: ITVietSiteBundle:Member, property: email }
+#        in_memory:
+#            users:
+#                user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+#                admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
 
     firewalls:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        login:
-            pattern:  ^/demo/secured/login$
-            security: false
-
-        secured_area:
-            pattern:    ^/demo/secured/
+        member:
+            pattern: ^/
+            anonymous: ~
             form_login:
-                check_path: /demo/secured/login_check
-                login_path: /demo/secured/login
+                provider: members
+                login_path: _member_to_login
+                check_path: _member_login_check
+                default_target_path: _member_home
+                success_handler: member_authentication_hander
+                failure_handler: member_authentication_hander
             logout:
-                path:   /demo/secured/logout
-                target: /demo/
+                path: _member_logout
+                target: _homepage
+                success_handler: member_authentication_hander
+
+#        secured_area:
+#            pattern:    ^/demo/secured/
+#            form_login:
+#                check_path: /demo/secured/login_check
+#                login_path: /demo/secured/login
+#            logout:
+#                path:   /demo/secured/logout
+#                target: /demo/
             #anonymous: ~
             #http_basic:
             #    realm: "Secured Demo Area"
 
     access_control:
+        #member
+        - { path: ^/thanh-vien, roles: ROLE_MEMBER }
+        - { path: ^/member, roles: ROLE_MEMBER }
+        - { path: ^/[a-z]+/member, roles: ROLE_MEMBER }
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
         #- { path: ^/_internal, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }

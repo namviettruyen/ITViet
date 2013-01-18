@@ -1,0 +1,13 @@
+{% extends 'ITVietSiteBundle::layout.html.twig' %}
+
+{% block title %}{% trans %}Register{% endtrans %}{% endblock %}
+
+{% block navigator %}
+  {% include 'ITVietSiteBundle::navigator.html.twig' with {'active':'none'} %}
+{% endblock %}
+
+{% block maincontents %}
+<div class="well">
+  <p class="text-info">{% trans %}We have send a confirmation email to{% endtrans %}: {{ email }}</p>
+</div>
+{% endblock %}

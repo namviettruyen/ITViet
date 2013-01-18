@@ -92,6 +92,9 @@ class Member extends AbstractUser
         $this->address = $val;
     }
 
+    //virtual
+    //public $upImage;
+
     /**
      * @ORM\Column(type="string", nullable=true)
      */
@@ -122,5 +125,18 @@ class Member extends AbstractUser
 
     public function getId() {
         return parent::getId();
+    }
+
+    public function updateMetaInfo() {
+        $this->fullNameInAscii = $this->getSearchableInAscii($this->fullName);
+    }
+    private function getSearchableInAscii($str) {
+        $str = str_replace("\n", ' ', $str);
+        $str = preg_replace('/[\s\n]{2,}/', ' ', $str);
+        $str = trim($str);
+
+        $searchableInVn = strtolower($str);
+        $charConv = new CharConverter();
+        return $charConv->toPlainLatin($searchableInVn);
     }
 }

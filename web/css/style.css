@@ -1,4 +1,5 @@
 body {
+overflow-y: scroll;
 padding-top: 60px;
 }
 .container.top {
@@ -6,6 +7,17 @@ float: left;
 margin-left: 140px;
 }
 .span2.language {
-margin: 5px 0 0 0;
+margin: 5px 10px 0 0;
 float: right;
+}
+
+#fmRegister .input-append {
+display: block !important;
+}
+#member_birthDate_day, #member_birthDate_month, #member_birthDate_year {
+width: 80px;
+margin-right: 15px;
+}
+.alert p {
+margin-bottom: 0;
 }

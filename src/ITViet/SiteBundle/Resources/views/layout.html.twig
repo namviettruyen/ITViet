@@ -7,6 +7,7 @@
     <meta name="description" content="{% block meta_description %}{% endblock %}" />
     <link rel="stylesheet" href="{{ asset('bs/css/bootstrap.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css" />
+    <script src="{{ asset('bs/js/jquery.js') }}" type="text/javascript"></script>
   </head>
   <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -16,12 +17,7 @@
           <div class="nav-collapse collapse">
             {% block navigator %}
             {% endblock %}
-            <form class="navbar-form pull-right">
-              <input class="span2" type="text" placeholder="{% trans %}Email{% endtrans %}">
-              <input class="span2" type="password" placeholder="{% trans %}Password{% endtrans %}">
-              <button class="btn" type="submit">{% trans %}Sign in{% endtrans %}</button>
-              <a class="btn btn-primary">{% trans %}Sign up{% endtrans %}</a>
-            </form>
+            {% include 'ITVietSiteBundle:Layout:formLogin.html.twig' %}
           </div> {# end nav-collapse #}
         </div> {# end container #}
 
@@ -49,6 +45,7 @@
       </footer>
     </div>
   <script src="{{ asset('bs/js/bootstrap.js') }}" type="text/javascript"></script>
-  <script src="{{ asset('bs/js/jquery.js') }}" type="text/javascript"></script>
+  <script src="{{ asset('js/validate.js') }}" type="text/javascript"></script>
+  {% include 'ITVietSiteBundle:Common:DatePicker.html.twig' %}
   </body>
 </html>

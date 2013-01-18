@@ -1,0 +1,34 @@
+{% extends 'ITVietSiteBundle::layout.html.twig' %}
+
+{% block title %}{% trans %}Login{% endtrans %}{% endblock %}
+
+{% block navigator %}
+  {% include 'ITVietSiteBundle::navigator.html.twig' with {'active':'none'} %}
+{% endblock %}
+
+{% block maincontents %}
+<script>
+<!--
+function CheckLoginForm()
+{
+  var strAlert = "";
+  strAlert = strAlert + VKCheckRequireField(document.getElementById("username"), "{% trans %}Please enter your email{% endtrans %}!\n");
+  strAlert = strAlert + VKCheckEmail(document.getElementById("username"), "{% trans %}Email is not valid{% endtrans %}!\n");
+  strAlert = strAlert + VKCheckRequireField(document.getElementById("password"), "{% trans %}Please enter your password{% endtrans %}!\n");
+  
+  if(strAlert != "") {
+    alert(strAlert);
+    return false;
+  } else {
+    return true;
+  }
+}
+-->
+</script>
+
+{% if error and error is defined %}
+    <div class="alert alert-error">{{ error.message | trans }}</div>
+{% endif %}
+<h1>{% trans %}Login{% endtrans %}</h1>
+  {% include 'ITVietSiteBundle:Login:formLogin.html.twig' %}
+{% endblock %}

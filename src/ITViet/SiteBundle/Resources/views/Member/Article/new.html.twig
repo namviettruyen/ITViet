@@ -1,0 +1,70 @@
+{% extends 'ITVietSiteBundle::layout.html.twig' %}
+{% set ckeditor = true %}
+
+{% block topmenu %}
+  {% include 'ITVietSiteBundle::topMenu.html.twig' with {'active':'member'}%}
+{% endblock %}
+
+{% block breadcrumb %}
+  {% include 'ITVietSiteBundle:Member\\Article:breadcrumb.html.twig' %}
+{% endblock %}
+
+{% block title %}{% trans %}Post new{% endtrans %}{% endblock %}
+
+{% form_theme form _self %}
+{% block field_errors %}
+  {% if errors %}
+  <ul class="errorMess">
+  {% for error in errors %}
+    <li>{{ error.messageTemplate | trans(error.messageParameters, 'validators') }}</li>
+  {% endfor %}
+  </ul>
+  {% endif %}
+{% endblock %}
+
+{% block maincontent %}
+
+<script>
+<!--
+function CheckPostNewForm()
+{
+  var strAlert = "";
+  strAlert = strAlert + VKCheckRequireField(document.getElementById("article_title"), "{% trans %}Please enter article title{% endtrans %}!\n");
+  
+  if(strAlert != "") {
+    alert(strAlert);
+    return false;
+  } else {
+    return true;
+  }
+}
+-->
+</script>
+
+<h1>{% trans %}Post new{% endtrans %}</h1>
+
+<form id="frmArtNew" action="{{ mlpath('_member_post_new') }}" method="post" {{ form_enctype(form) }}>
+  {{ form_errors(form) }}
+  <p class="ele">
+   {{ form_widget(form.title, { 'attr': {'size':75, 'placeholder' :"Enter article title..."| trans}}) }}
+  </p>
+  <div class="ele">
+   {{ form_widget(form.content, { 'attr': {'cols':'80', 'rows':'10', 'class':'ckeditor', 'name':'editor1'}}) }}
+  </div>
+  <p class="ele">
+    <span class="group">
+      <span class="red">*</span>
+      <span class="text">{% trans %}Published{% endtrans %}</span>
+    </span>
+   {{ form_widget(form.isActive) }}
+  </p>
+  <p>
+    <span class="group">
+      <span class="text">&nbsp;</span>
+    </span>
+    <input class="btn-itv" type="submit" value="Submit" onclick="return CheckPostNewForm();" />
+  </p>
+  {{ form_rest(form) }}
+</form>
+{% endblock %}
+

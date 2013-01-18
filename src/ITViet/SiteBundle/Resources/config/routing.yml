@@ -34,3 +34,111 @@ _vi_contactpage:
     requirements:
         _scheme: http
 
+_register:
+    pattern: /{_locale}/register
+    defaults: { _controller: ITVietSiteBundle:Register:new }
+    requirements:
+        _scheme: http
+        _locale: en
+_vi_register:
+    pattern: /dang-ky
+    defaults: { _controller: ITVietSiteBundle:Register:new, _locale: vi }
+    requirements:
+        _scheme: http
+
+_member_check_email_availability:
+    pattern: /{_locale}/register/check/{email}
+    defaults: { _controller: ITVietSiteBundle:Register:checkEmailAvailability }
+    requirements:
+        _scheme: http
+        _locale: en
+_vi_member_check_email_availability:
+    pattern: /dang-ky/check/{email}
+    defaults: { _controller: ITVietSiteBundle:Register:checkEmailAvailability, _locale: vi }
+    requirements:
+        _scheme: http
+_member_check_confirm_email:
+    pattern:  /{_locale}/register/confirm_email
+    defaults: { _controller: ITVietSiteBundle:Register:checkConfirmEmail }
+    requirements:
+        _scheme: http
+        _locale: en
+_vi_member_check_confirm_email:
+    pattern:  /dang-ky/confirm_email
+    defaults: { _controller: ITVietSiteBundle:Register:checkConfirmEmail, _locale: vi }
+    requirements:
+        _scheme: http
+
+_member_confirm:
+    pattern:  /{_locale}/register/confirm/{token}
+    defaults: { _controller: ITVietSiteBundle:Register:confirm }
+    requirements:
+        _scheme: http
+        _locale: en
+_vi_member_confirm:
+    pattern:  /dang-ky/confirm/{token}
+    defaults: { _controller: ITVietSiteBundle:Register:confirm, _locale: vi }
+    requirements:
+        _scheme: http
+_member_already_confirmed:
+    pattern:  /{_locale}/register/already_confirm
+    defaults: { _controller: ITVietSiteBundle:Register:alreadyConfirmed }
+    requirements:
+        _scheme: http
+        _locale: en
+_vi_member_already_confirmed:
+    pattern:  /dang-ky/already_confirm
+    defaults: { _controller: ITVietSiteBundle:Register:alreadyConfirmed, _locale: vi }
+    requirements:
+        _scheme: http
+_member_confirmed:
+    pattern:  /{_locale}/register/confirmed
+    defaults: { _controller: ITVietSiteBundle:Register:confirmed }
+    requirements:
+        _scheme: http
+        _locale: en
+_vi_member_confirmed:
+    pattern:  /dang-ky/confirmed
+    defaults: { _controller: ITVietSiteBundle:Register:confirmed, _locale: vi }
+    requirements:
+        _scheme: http
+
+###################################################
+_member_to_login:
+    pattern:  /{_locale}/to-login
+    defaults: { _controller: ITVietSiteBundle:Login:memberToLogin, _locale: vi }
+    requirements:
+        _scheme: http
+        _locale: en|vi
+_member_login:
+    pattern:  /{_locale}/login
+    defaults: { _controller: ITVietSiteBundle:Login:member }
+    requirements:
+        _scheme: http
+        _locale: en
+_vi_member_login:
+    pattern:  /dang-nhap
+    defaults: { _controller: ITVietSiteBundle:Login:member, _locale: vi }
+    requirements:
+        _scheme: http
+
+_member_login_check:
+    pattern:  /login_check
+
+_member_home:
+    pattern:  /{_locale}/member
+    defaults: { _controller: ITVietSiteBundle:Member\Home:index }
+    requirements:
+        _scheme: http
+        _locale: en
+_vi_member_home:
+    pattern:  /thanh-vien
+    defaults: { _controller: ITVietSiteBundle:Member\Home:index, _locale: vi }
+    requirements:
+        _scheme: http
+
+_member_logout:
+    pattern: /member/logout
+    requirements:
+        _scheme: http
+

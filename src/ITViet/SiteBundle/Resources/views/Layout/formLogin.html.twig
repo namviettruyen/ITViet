@@ -1,0 +1,31 @@
+{% if is_granted('ROLE_MEMBER') %}
+<form class="navbar-form pull-right" action="#" method="post">
+  <span style="color:white">{% trans %}Hello{% endtrans %}: {{ app.user.fullname | truncate(10,'...') }}&nbsp;</span>
+  <a class="btn btn-primary" href="{{ mlpath('_member_logout') }}">{% trans %}Logout{% endtrans %}</a>
+</form>
+{% else %}
+<script>
+<!--
+  function checkForm(){
+    var strAlert = "";
+    strAlert = strAlert + VKCheckRequireField(document.getElementById("txtEmail"), "{% trans %}Please enter your emal{% endtrans %}!\n");
+    strAlert = strAlert + VKCheckRequireField(document.getElementById("txtPassword"), "{% trans %}Please enter your password{% endtrans %}!\n");
+    strAlert = strAlert + VKCheckEmail(document.getElementById("txtEmail"), "{% trans %}Your email is not valid{% endtrans %}!\n");
+
+    if(strAlert != ""){
+      alert(strAlert);
+      return false;
+    }else{
+      return true;
+    }
+  }
+-->
+</script>
+
+<form class="navbar-form pull-right" action="{{ mlpath('_member_login_check') }}" method="post">
+  <input id="txtEmail" name="_username" class="span2" type="text" placeholder="{% trans %}Email{% endtrans %}">
+  <input id="txtPassword" name="_password" class="span2" type="password" placeholder="{% trans %}Password{% endtrans %}">
+  <button class="btn" type="submit" onclick="return checkForm();">{% trans %}Sign in{% endtrans %}</button>
+  <a class="btn btn-primary" href="{{ mlpath('_register') }}">{% trans %}Sign up{% endtrans %}</a>
+</form>
+{% endif %}

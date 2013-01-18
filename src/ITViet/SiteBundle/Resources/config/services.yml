@@ -7,3 +7,15 @@ services:
         tags:
           - { name: twig.extension }
         arguments: [@service_container]
+
+    member_authentication_hander:
+        class: ITViet\SiteBundle\Handler\MemberAuthenticationHandler
+        arguments: [@router, @translator]
+
+    it_viet_site.url_slugger:
+        class: ITViet\SiteBundle\Model\UrlSlugger
+        arguments: [@it_viet_site.char_converter]
+
+    it_viet_site.char_converter:
+        class: ITViet\SiteBundle\Model\CharConverter
+

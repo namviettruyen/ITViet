@@ -2,6 +2,11 @@
   <li {% if active == 'home' %}class="active"{% endif %}>
     <a href="{{ mlpath('_homepage') }}">{% trans %}Home{% endtrans %}</a>
   </li>
+  {% if is_granted('ROLE_MEMBER') %}
+  <li {% if active == 'profile' %}class="active"{% endif %}>
+    <a href="{{ mlpath('_member_home') }}">{% trans %}Profile{% endtrans %}</a>
+  </li>
+  {% endif %}
   <li {% if active == 'about' %}class="active"{% endif %}>
     <a href="{{ mlpath('_aboutpage') }}">{% trans %}About{% endtrans %}</a>
   </li>

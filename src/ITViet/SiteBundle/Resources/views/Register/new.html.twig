@@ -1,0 +1,110 @@
+{% extends 'ITVietSiteBundle::layout.html.twig' %}
+
+{% block title %}{% trans %}Register{% endtrans %}{% endblock %}
+
+{% block navigator %}
+  {% include 'ITVietSiteBundle::navigator.html.twig' with {'active':'none'} %}
+{% endblock %}
+
+{% form_theme form _self %}
+{% block field_errors %}
+  {% if errors %}
+  <div class="alert alert-error">
+    {% for error in errors %}
+    <p>{{ error.messageTemplate | trans(error.messageParameters, 'validators') }}</p>
+    {% endfor %}
+  </div>
+  {% endif %}
+{% endblock %}
+
+{% block maincontents %}
+<script>
+<!--
+  function checkMemberMail(el){
+    var form = $(el).closest("form");
+    form.find('.email_availability_checker').remove();
+    var strAlert = "";
+    strAlert = strAlert + VKCheckRequireField(el, "{% trans %}Please enter your email{% endtrans %}!\n");
+    strAlert = strAlert + VKCheckEmail(el, "{% trans %}Your email is not valid{% endtrans %}!\n");
+    if(strAlert != ""){
+      alert(strAlert);
+    }else{
+      $.ajax({
+        url: '{{ mlpath('_member_check_email_availability', {'email':''}) }}/' + el.value,
+        success: function(data) {
+          form.find('.email_availability_checker').remove();
+          form.find(document.fmRegister['btnCheckMail']).after(data);
+        }
+      });
+      form.find(document.fmRegister['btnCheckMail']).after('<div class="email_availability_checker"><img src="{{ asset('images/icon/loading.gif') }}" /></div>');
+    }
+  }
+-->
+</script>
+
+<h1>Welcome!</h1>
+<form class="form-horizontal" name="fmRegister" id="fmRegister" action="{{ mlpath('_register') }}" method="post" {{ form_enctype(form) }}>
+  {{ form_errors(form) }}
+  <fieldset>
+    <legend>{% trans %}Register{% endtrans %}</legend>
+    <div class="control-group">
+      <label class="control-label" for="member_email">{% trans %}Email{% endtrans %}</label>
+      <div class="controls">
+        {{ form_widget(form.email, {'attr': {'class':'input-xlarge'}}) }}
+        <input name="btnCheckMail" value="Check Mail" class="btn" type="button" onclick="return checkMemberMail(document.fmRegister.elements['member[email]']);" />
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="member_password">{% trans %}Password{% endtrans %}</label>
+      <div class="controls">
+        {{ form_widget(form.password, {'attr': {'class':'input-xlarge'}}) }}
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="member_retypePassword">{% trans %}RetypePassword{% endtrans %}</label>
+      <div class="controls">
+        {{ form_widget(form.retypePassword, {'attr': {'class':'input-xlarge'}}) }}
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="member_fullName">{% trans %}FullName{% endtrans %}</label>
+      <div class="controls">
+        {{ form_widget(form.fullName, {'attr': {'class':'input-xlarge'}}) }}
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="member_birthDate">{% trans %}BirthDate{% endtrans %}</label>
+      <div class="controls">
+        {{ form_widget(form.birthDate, {'attr': {'class':''}}) }}
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="member_gender">{% trans %}Gender{% endtrans %}</label>
+      <div class="controls">
+        {{ form_widget(form.gender, {'attr': {'class':'span2'}}) }}
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="member_address">{% trans %}Address{% endtrans %}</label>
+      <div class="controls">
+        {{ form_widget(form.address, {'attr': {'class':'input-xlarge'}}) }}
+      </div>
+    </div>
+{#
+    <div class="control-group">
+      <label class="control-label" for="member_upImage">{% trans %}Image{% endtrans %}</label>
+      <div class="controls">
+        {{ form_widget(form.upImage, {'attr': {'class':''}}) }}
+      </div>
+    </div>
+#}
+
+    <div class="control-group">
+      <div class="controls">
+        <button class="btn btn-primary" type="submit">{% trans %}Register{% endtrans %}</button>
+      </div>
+    </div>
+  </fieldset>
+  {{ form_rest(form) }}
+</form>
+{% endblock %}

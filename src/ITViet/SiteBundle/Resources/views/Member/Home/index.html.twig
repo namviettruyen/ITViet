@@ -1,0 +1,59 @@
+{% extends 'ITVietSiteBundle::layout.html.twig' %}
+
+{% block navigator %}
+  {% include 'ITVietSiteBundle::navigator.html.twig' with {'active':'profile'} %}
+{% endblock %}
+
+{% block title %}{% trans %}Personal Page{% endtrans %}{% endblock %}
+
+{% block maincontents %}
+<h1>{% trans %}Personal Page{% endtrans %}</h1>
+<div class="tabbable tabs-left">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#">Home</a></li>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Home</a></li>
+  </ul>
+  <div class="tab-content">
+  </div>
+</div>
+
+
+<div>
+Chu de nong
+</div>
+<div>
+Bai viet cua ban be
+</div>
+
+<div class="div-post-new">
+  <a href="#" class="post-new">Post new</a>
+</div>
+
+<ul class="tabs">
+  <li><a href="#hot" class="active">Hot</a></li>
+  <li><a href="#friend">Friend</a></li>
+</ul>
+<div class="tab_container">
+  <div id="hot" class="tab_content">
+    <ul>
+      <li><a>Bai viet abc hot ...</a>
+      <li><a>Bai viet abc hot ...</a>
+      <li><a>Bai viet abc hot ...</a>
+      <li><a>Bai viet abc hot ...</a>
+      <li><a>Bai viet abc hot ...</a>
+      <li><a>Bai viet abc hot ...</a>
+    </ul>
+  </div>
+  <div id="friend" class="tab_content">
+    <ul>
+      <li><a>Bai viet abc friend ...</a>
+      <li><a>Bai viet abc friend ...</a>
+      <li><a>Bai viet abc friend ...</a>
+      <li><a>Bai viet abc friend ...</a>
+      <li><a>Bai viet abc friend ...</a>
+      <li><a>Bai viet abc friend ...</a>
+    </ul>
+  </div>
+</div>
+{% endblock %}

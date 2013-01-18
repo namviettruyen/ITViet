@@ -1,8 +1,28 @@
 "Home": "Trang chủ"
+"Profile": "Trang cá nhân"
 "About": "About"
 "Contact": "Liên hệ"
 "Email": "Email"
 "Password": "Mật khẩu"
 "Sign in": "Dăng nhập"
 "Sign up": "Đăng ký"
+"Logout": "Đăng xuất"
+"Register": "Đăng ký"
 "Vietnamese": "Việt Nam"
+"RetypePassword": "Nhập lại mật khẩu"
+"FullName": "Tên"
+"BirthDate": "Ngày sinh"
+"Gender": "Giới tính"
+"Address": "Địa chỉ"
+"Image": "Hình ảnh"
+"Male": "Nam"
+"Female": "Nữ"
+"Day": "Ngày"
+"Month": "Tháng"
+"Year": "Năm"
+
+'Bad credentials': 'Email hoặc mật khẩu không hợp lệ.'
+'User account is disabled.': 'Tài khoản chưa được kích hoạt.'
+'The presented password cannot be empty.': 'Mật khẩu không được để trống.'
+'The presented password is invalid.': 'Mật khẩu không hợp lệ.'
+
