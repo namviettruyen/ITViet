@@ -2,7 +2,10 @@
 
 namespace ITViet\SiteBundle\Handler;
 
-use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
+#use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
+#new solution for log out and flash bye-bye
+use Symfony\Component\Security\Http\Logout\LogoutHandlerInterface;
+
 use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -19,7 +22,7 @@ use Symfony\Component\Security\Core\Exception\DisabledException;
 abstract class AuthenticationHandler
 implements AuthenticationSuccessHandlerInterface,
            AuthenticationFailureHandlerInterface,
-           LogoutSuccessHandlerInterface
+           LogoutHandlerInterface
 {
     protected $router;
     protected $translator;
@@ -29,6 +32,7 @@ implements AuthenticationSuccessHandlerInterface,
         $this->router = $router;
         $this->translator = $translator;
     }
+    /*
     public function onLogoutSuccess(Request $request)
     {
         $this->resetLocale($request);
@@ -38,6 +42,23 @@ implements AuthenticationSuccessHandlerInterface,
 
         return $response;
     }
+     */
+    public function logout(Request $request, Response $response, TokenInterface $token)
+    {
+
+        $this->resetLocale($request);
+        $url = $this->generateMlUrl($request, '_homepage', true);
+
+        $response = new RedirectResponse($url, 302);
+
+        $session = $request->getSession();
+        $session->invalidate();
+        $session->setFlash('success', 'Logout successfully');
+
+        return $response;
+    }
+
+
     //TODO: create "mlrouter" service instead
     public function generateMlUrl($request, $route, $absolute = false, $params = array())
     {

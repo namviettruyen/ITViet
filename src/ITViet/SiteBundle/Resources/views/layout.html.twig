@@ -15,34 +15,18 @@
         <div class="container top">
           <a class="brand" href="#">Project</a>
           <div class="nav-collapse collapse">
-            {% block navigator %}
-            {% endblock %}
+            {% block navigator %}{% endblock %}
             {% include 'ITVietSiteBundle:Layout:formLogin.html.twig' %}
           </div> {# end nav-collapse #}
         </div> {# end container #}
-
-        {% set pathParams = {
-        'route':app.request.attributes.get('_route'),
-        'args':app.request.attributes.all()|
-        merge(app.request.query.all)}|
-        merge((langAwarePathParams is defined) ? {'langAwareParams':langAwarePathParams} : {}) %}
-
-        <select class="span2 language" onChange="location.href=$(this).val();">
-          {% for item in getPathsForLocales(pathParams) %}
-          <option{% if item.locale == locale %} selected='selected'{% endif %} value='{{ item.path}}'>
-            {{ item.label|trans }}
-          </option>
-          {% endfor %}
-        </select>
+        {% include 'ITVietSiteBundle:Layout:languageSelect.html.twig' %}
       </div>
     </div>
     <div class="container">
-      {% block maincontents %}
-      {% endblock %}
+      {% include 'ITVietSiteBundle:Layout:flashMessage.html.twig' %}
+      {% block maincontents %}{% endblock %}
       <hr>
-      <footer>
-        <p>&copy; Nam LuuDuc</p>
-      </footer>
+      {% include 'ITVietSiteBundle:Layout:footer.html.twig' %}
     </div>
   <script src="{{ asset('bs/js/bootstrap.js') }}" type="text/javascript"></script>
   <script src="{{ asset('js/validate.js') }}" type="text/javascript"></script>

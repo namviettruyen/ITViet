@@ -33,12 +33,15 @@ class MemberAuthenticationHandler extends AuthenticationHandler
                 $url = $this->generateMlUrl($request, '_member_home', true);
             }
 
+            $request->getSession()->setFlash('success', 'Login successfully');
+
             $response = new RedirectResponse($url, 302);
         }
 
         return $response;
     }
 
+    #Handling when login wrong information, when access invalid config security handle
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
         $jumpTo = null;
@@ -75,7 +78,7 @@ class MemberAuthenticationHandler extends AuthenticationHandler
 
         return $response;
     }
-
+/*
     public function onLogoutSuccess(Request $request)
     {
         $this->resetLocale($request);
@@ -83,7 +86,10 @@ class MemberAuthenticationHandler extends AuthenticationHandler
 
         $response = new RedirectResponse($url, 302);
 
+        $session = $request->getSession();
+        $session->setFlash('success', 'Logout successfully');
+
         return $response;
     }
-
+ */
 }

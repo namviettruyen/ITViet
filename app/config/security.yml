@@ -34,8 +34,8 @@ security:
                 failure_handler: member_authentication_hander
             logout:
                 path: _member_logout
-                target: _homepage
-                success_handler: member_authentication_hander
+                #target: _hoepage
+                handler: member_authentication_hander
 
 #        secured_area:
 #            pattern:    ^/demo/secured/

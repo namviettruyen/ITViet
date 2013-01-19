@@ -1,0 +1,14 @@
+{% set pathParams = {
+'route':app.request.attributes.get('_route'),
+'args':app.request.attributes.all()|
+merge(app.request.query.all)}|
+merge((langAwarePathParams is defined) ? {'langAwareParams':langAwarePathParams} : {}) %}
+
+<select class="span2 language" onChange="location.href=$(this).val();">
+  {% for item in getPathsForLocales(pathParams) %}
+  <option{% if item.locale == locale %} selected='selected'{% endif %} value='{{ item.path}}'>
+    {{ item.label|trans }}
+  </option>
+  {% endfor %}
+</select>
+

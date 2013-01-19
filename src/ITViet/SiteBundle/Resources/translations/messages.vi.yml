@@ -26,3 +26,5 @@
 'The presented password cannot be empty.': 'Mật khẩu không được để trống.'
 'The presented password is invalid.': 'Mật khẩu không hợp lệ.'
 
+'Login successfully': 'Đăng nhập thành công'
+'Logout successfully': 'Đăng xuất thành công'
