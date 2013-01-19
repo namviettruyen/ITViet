@@ -13,8 +13,9 @@ class HomeController extends BaseController
     public function indexAction()
     {
         //$memberService = $this->get('it_viet_site.member_service');
+        $member = $this->get('security.context')->getToken()->getUser();
         return array(
-          'hello' => 'hello',
+          'member' => $member,
         );
     }
 }

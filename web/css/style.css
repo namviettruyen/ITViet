@@ -21,3 +21,43 @@ margin-right: 15px;
 .alert p {
 margin-bottom: 0;
 }
+
+.tab-content {
+border-bottom: 1px solid #DDDDDD;
+}
+
+.group:after { visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0; }
+.group { display: inline-block; clear: both; }
+
+.profile {
+margin-bottom: 20px;
+}
+.profile .gravatar {
+margin-right: 15px;
+float: left;
+}
+.profile .gravatar div {
+margin-top: 10px;
+text-align: center;
+width: 128px;
+}
+.profile .data {
+float: left;
+width: 300px
+}
+.profile .data table {
+width: 100%;
+}
+
+.full-name {
+border-bottom: 1px solid #dddddd;
+}
+
+.greeting {
+display: inline-block;
+color:white;
+margin-top: 10px;
+}
+.navbar a.btn.fix {
+margin-top: 0;
+}

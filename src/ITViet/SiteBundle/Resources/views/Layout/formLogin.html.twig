@@ -1,7 +1,11 @@
 {% if is_granted('ROLE_MEMBER') %}
 <form class="navbar-form pull-right" action="#" method="post">
-  <span style="color:white">{% trans %}Hello{% endtrans %}: {{ app.user.fullname | truncate(10,'...') }}&nbsp;</span>
-  <a class="btn btn-primary" href="{{ mlpath('_member_logout') }}">{% trans %}Logout{% endtrans %}</a>
+  <span class="greeting">
+    {% trans %}Hello{% endtrans %}: {{ app.user.fullname | truncate(10,'...') }}&nbsp;
+  </span>
+  <a class="btn btn-primary fix" href="{{ mlpath('_member_logout') }}">
+    <i class="icon-off icon-white"></i> {% trans %}Logout{% endtrans %}
+  </a>
 </form>
 {% else %}
 <script>

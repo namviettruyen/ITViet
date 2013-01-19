@@ -4,19 +4,75 @@
   {% include 'ITVietSiteBundle::navigator.html.twig' with {'active':'profile'} %}
 {% endblock %}
 
-{% block title %}{% trans %}Personal Page{% endtrans %}{% endblock %}
+{% block title %}{% trans %}Profile{% endtrans %}{% endblock %}
 
 {% block maincontents %}
-<h1>{% trans %}Personal Page{% endtrans %}</h1>
-<div class="tabbable tabs-left">
-  <ul class="nav nav-tabs">
-    <li class="active"><a href="#">Home</a></li>
-    <li><a href="#">Home</a></li>
-    <li><a href="#">Home</a></li>
-  </ul>
-  <div class="tab-content">
+
+<h4 class="full-name">{{ member.fullName }}</h1>
+
+<div class="profile group">
+  <div class="gravatar">
+    <a href="#">
+      <img class="img-polaroid" src="/images/1.png" width="128" height="128" alt="" />
+    </a>
+    <div>432EXP</div>
+  </div>
+  <div class="data">
+    <table>
+      <tr>
+        <td width="30%">{% trans %}From{% endtrans %}:</td>
+        <td>{{ member.address }}</td>
+      </tr>
+      <tr>
+        <td>{% trans %}Register{% endtrans %}:</td>
+        <td>{{ member.since|date('d-m-Y') }}</td>
+      </tr>
+      <tr>
+        <td>{% trans %}Gender{% endtrans %}:</td>
+        <td>{{ member.gender }}</td>
+      </tr>
+      <tr>
+        <td>{% trans %}Age{% endtrans %}:</td>
+        <td>{{ member.birthDate|date('d-m-Y') }}</td>
+      </tr>
+    </table>
   </div>
 </div>
+
+<ul id="myTab" class="nav nav-tabs">
+  <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+  <li><a href="#profile" data-toggle="tab">Profile</a></li>
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans %}Manager Account{% endtrans %} <b class="caret"></b></a>
+    <ul class="dropdown-menu">
+      <li><a href="#dropdown1" data-toggle="tab">{% trans %}Change information{% endtrans %}</a></li>
+      <li><a href="#dropdown2" data-toggle="tab">{% trans %}Change email{% endtrans %}</a></li>
+      <li><a href="#dropdown3" data-toggle="tab">{% trans %}Change password{% endtrans %}</a></li>
+    </ul>
+  </li>
+</ul>
+
+<div id="myTabContent" class="tab-content">
+  <div class="tab-pane fade in active" id="home">
+    <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+  </div>
+  <div class="tab-pane fade" id="profile">
+    <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+  </div>
+  <div class="tab-pane fade" id="dropdown1">
+    {% render 'ITVietSiteBundle:Member\\Config:editInfo' with {'standalone': true} %}
+  </div>
+  <div class="tab-pane fade" id="dropdown2">
+    <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater. Lomo wolf viral, mustache readymade thundercats keffiyeh craft beer marfa ethical. Wolf salvia freegan, sartorial keffiyeh echo park vegan.</p>
+  </div>
+  <div class="tab-pane fade" id="dropdown3">
+    <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater. Lomo wolf viral, mustache readymade thundercats keffiyeh craft beer marfa ethical. Wolf salvia freegan, sartorial keffiyeh echo park vegan.</p>
+  </div>
+
+</div>{# end tab-content #}
+
+
+
 
 
 <div>

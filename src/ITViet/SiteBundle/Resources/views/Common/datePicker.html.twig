@@ -1,0 +1,7 @@
+{% if datepicker is defined %}
+<script type="text/javascript" src="{{ asset('bs/js/bootstrap-datepicker.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('bs/css/datepicker.css') }}" type="text/css" />
+<script type="text/javascript">
+  $('.dtpicker').datepicker();
+</script>
+{% endif %}

@@ -1,0 +1,48 @@
+<form class="form-horizontal" name="fmRegister" id="fmRegister" action="{{ mlpath('_register') }}" method="post" {{ form_enctype(form) }}>
+  {{ form_errors(form) }}
+  <fieldset>
+    <legend>{% trans %}Register{% endtrans %}</legend>
+    
+    
+    
+    <div class="control-group">
+      <label class="control-label" for="member_fullName">{% trans %}FullName{% endtrans %}</label>
+      <div class="controls">
+        {{ form_widget(form.fullName, {'attr': {'class':'input-xlarge'}}) }}
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="member_birthDate">{% trans %}BirthDate{% endtrans %}</label>
+      <div class="controls">
+        {{ form_widget(form.birthDate, {'attr': {'class':''}}) }}
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="member_gender">{% trans %}Gender{% endtrans %}</label>
+      <div class="controls">
+        {{ form_widget(form.gender, {'attr': {'class':'span2'}}) }}
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="member_address">{% trans %}Address{% endtrans %}</label>
+      <div class="controls">
+        {{ form_widget(form.address, {'attr': {'class':'input-xlarge'}}) }}
+      </div>
+    </div>
+{#
+    <div class="control-group">
+      <label class="control-label" for="member_upImage">{% trans %}Image{% endtrans %}</label>
+      <div class="controls">
+        {{ form_widget(form.upImage, {'attr': {'class':''}}) }}
+      </div>
+    </div>
+#}
+
+    <div class="control-group">
+      <div class="controls">
+        <button class="btn btn-primary" type="submit">{% trans %}Register{% endtrans %}</button>
+      </div>
+    </div>
+  </fieldset>
+  {{ form_rest(form) }}
+</form>
