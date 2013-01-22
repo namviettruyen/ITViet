@@ -9,6 +9,7 @@ use ITViet\SiteBundle\Model\CharConverter;
 /**
  * @ORM\Entity(repositoryClass="ITViet\SiteBundle\Repository\MemberRepository")
  * @ORM\Table()
+ * @ORM\HasLifecycleCallbacks()
  */
 
 class Member extends AbstractUser
@@ -127,6 +128,9 @@ class Member extends AbstractUser
         return parent::getId();
     }
 
+    /**
+     * @ORM\PrePersist
+     */
     public function updateMetaInfo() {
         $this->fullNameInAscii = $this->getSearchableInAscii($this->fullName);
     }
@@ -139,4 +143,59 @@ class Member extends AbstractUser
         $charConv = new CharConverter();
         return $charConv->toPlainLatin($searchableInVn);
     }
+
+    //return the Gravatar (http://gravatar.com/)
+    public function getGravatar( $size = 128 ) {
+        $gravatar_id = md5(strtolower(trim($this->email)));
+        $gravatar_url = "https://secure.gravatar.com/avatar/{$gravatar_id}?s={$size}";
+        return $gravatar_url;
+    }
+
+    protected function getListBirthDate() {
+        if ($this->birthDate) {
+            return explode('/', $this->birthDate->format('Y/n/j'));
+        } else {
+            return array(null, null, null);
+        }
+    }
+
+    public function getBirthDay() {
+        $dateList = $this->getListBirthDate();
+        return $dateList[2];
+    }
+    public function setBirthDay($day) {
+        $dateList = $this->getListBirthDate();
+        $date = new \DateTime();
+        $this->birthDate = $date->setDate($dateList[0], $dateList[1], intval($day));
+    }
+
+    public function getBirthMonth() {
+        $dateList = $this->getListBirthDate();
+        return $dateList[1];
+    }
+    public function setBirthMonth($month) {
+        $dateList = $this->getListBirthDate();
+        $date = new \DateTime();
+        $this->birthDate = $date->setDate($dateList[0], intval($month), $dateList[2]);
+    }
+
+    public function getBirthYear() {
+        $dateList = $this->getListBirthDate();
+        return $dateList[0];
+    }
+    public function setBirthYear($year) {
+        $dateList = $this->getListBirthDate();
+        $date = new \DateTime();
+        $this->birthDate = $date->setDate(intval($year), $dateList[1], $dateList[2]);
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setSinceValue() {
+        if (!$this->getSince()) {
+            $this->since = new \DateTime();
+        }
+    }
+
 }

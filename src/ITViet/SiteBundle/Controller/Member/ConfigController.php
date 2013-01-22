@@ -11,11 +11,22 @@ class ConfigController extends BaseController
 {
     public function editInfoAction() {
         $t = $this->get('translator');
-        $session = $this->get('session');
+        $request = $this->getRequest();
         $em = $this->get('doctrine.orm.entity_manager');
-        $member = new Member();
+        $member = $this->get('security.context')->getToken()->getUser();
 
         $form = $this->createForm(new MemberEditType(), $member);
+
+        if ($request->getMethod() == 'POST') {
+            $form->bindRequest($request);
+
+            if ($form->isValid()) {
+                $em->persist($member);
+                $em->flush();
+                $this->get('session')->setFlash('success', $t->trans('Update success'));
+                return $this->redirect($this->generateMlUrl('_member_home'));
+            }
+        }
 
         $res = $this->render('ITVietSiteBundle:Member\\Config:editInfo.html.twig', array(
           'form' => $form->createView(),
@@ -24,5 +35,4 @@ class ConfigController extends BaseController
         $res->setPublic();
         return $res;
     }
-
 }

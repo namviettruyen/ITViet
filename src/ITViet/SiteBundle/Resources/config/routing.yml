@@ -142,3 +142,15 @@ _member_logout:
     requirements:
         _scheme: http
 
+_member_profile_edit:
+    pattern:  /{_locale}/member/edit
+    defaults: { _controller: ITVietSiteBundle:Member\Config:editInfo }
+    requirements:
+        _scheme: http
+        _locale: en
+_vi_member_profile_edit:
+    pattern:  /{_locale}/thanh-vien/sua
+    defaults: { _controller: ITVietSiteBundle:Member\Config:editInfo, _locale: vi }
+    requirements:
+        _scheme: http
+

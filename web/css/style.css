@@ -14,7 +14,7 @@ float: right;
 #fmRegister .input-append {
 display: block !important;
 }
-#member_birthDate_day, #member_birthDate_month, #member_birthDate_year {
+#member_birthDate_day, #member_birthDate_month, #member_birthDate_year, #member_birthYear {
 width: 80px;
 margin-right: 15px;
 }

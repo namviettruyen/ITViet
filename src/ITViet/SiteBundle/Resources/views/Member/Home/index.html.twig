@@ -13,7 +13,7 @@
 <div class="profile group">
   <div class="gravatar">
     <a href="#">
-      <img class="img-polaroid" src="/images/1.png" width="128" height="128" alt="" />
+      <img class="img-polaroid" src="{{ member.getGravatar }}" alt="{{ member.fullName }}" />
     </a>
     <div>432EXP</div>
   </div>
@@ -29,11 +29,15 @@
       </tr>
       <tr>
         <td>{% trans %}Gender{% endtrans %}:</td>
-        <td>{{ member.gender }}</td>
+        <td>
+          {% if member.gender == 'M' %}{% trans %}Male{% endtrans %}
+          {% else %}{% trans %}Female{% endtrans %}
+          {% endif %}
+        </td>
       </tr>
       <tr>
         <td>{% trans %}Age{% endtrans %}:</td>
-        <td>{{ member.birthDate|date('d-m-Y') }}</td>
+        <td>{{ date()|date('Y') - member.birthDate|date('Y') }}</td>
       </tr>
     </table>
   </div>
@@ -70,46 +74,4 @@
   </div>
 
 </div>{# end tab-content #}
-
-
-
-
-
-<div>
-Chu de nong
-</div>
-<div>
-Bai viet cua ban be
-</div>
-
-<div class="div-post-new">
-  <a href="#" class="post-new">Post new</a>
-</div>
-
-<ul class="tabs">
-  <li><a href="#hot" class="active">Hot</a></li>
-  <li><a href="#friend">Friend</a></li>
-</ul>
-<div class="tab_container">
-  <div id="hot" class="tab_content">
-    <ul>
-      <li><a>Bai viet abc hot ...</a>
-      <li><a>Bai viet abc hot ...</a>
-      <li><a>Bai viet abc hot ...</a>
-      <li><a>Bai viet abc hot ...</a>
-      <li><a>Bai viet abc hot ...</a>
-      <li><a>Bai viet abc hot ...</a>
-    </ul>
-  </div>
-  <div id="friend" class="tab_content">
-    <ul>
-      <li><a>Bai viet abc friend ...</a>
-      <li><a>Bai viet abc friend ...</a>
-      <li><a>Bai viet abc friend ...</a>
-      <li><a>Bai viet abc friend ...</a>
-      <li><a>Bai viet abc friend ...</a>
-      <li><a>Bai viet abc friend ...</a>
-    </ul>
-  </div>
-</div>
 {% endblock %}

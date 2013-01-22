@@ -42,12 +42,16 @@ class RegisterController extends BaseController
                 $form->addError(new FormError($t->trans('Your retype password is not match')));
 
             if($form->isValid()){
-                $member->setSince(new \DateTime());
+
+                //$member->setSince(new \DateTime());
+                //$member->updateMetaInfo();
+                //AUTO by Lifecycle Classbacks
+
                 $member->generateConfirmationToken();
+
                 $loginInfo = new MemberLoginInfo();
                 $loginInfo->setCount(0);
                 $member->setLoginInfo($loginInfo);
-                $member->updateMetaInfo();
                 $email = $member->getEmail();
 
                 //send mail
