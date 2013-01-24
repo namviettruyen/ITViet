@@ -1,0 +1,10 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <div>
+      Your mail change at Nam Blog with name {{ member.fullName }}<br />
+      <a href="{{ mlurl('_member_change_email', {'token':member.confirmationToken}) }}">Click here to accept</a>
+    </div>
+  </body>
+</html>

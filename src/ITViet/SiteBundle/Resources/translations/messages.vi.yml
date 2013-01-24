@@ -8,7 +8,6 @@
 "Sign up": "Đăng ký"
 "Logout": "Đăng xuất"
 "Register": "Đăng ký"
-"Vietnamese": "Việt Nam"
 "RetypePassword": "Nhập lại mật khẩu"
 "FullName": "Tên"
 "BirthDate": "Ngày sinh"
@@ -38,3 +37,5 @@
 'Change avatar': 'Thay đổi hình đại diện'
 'Save': 'Lưu'
 'Update success': 'Cập nhật thành công'
+
+'Change email': 'Thay đổi email'

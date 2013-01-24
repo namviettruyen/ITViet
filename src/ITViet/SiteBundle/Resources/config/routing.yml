@@ -149,8 +149,32 @@ _member_profile_edit:
         _scheme: http
         _locale: en
 _vi_member_profile_edit:
-    pattern:  /{_locale}/thanh-vien/sua
+    pattern:  /thanh-vien/sua
     defaults: { _controller: ITVietSiteBundle:Member\Config:editInfo, _locale: vi }
+    requirements:
+        _scheme: http
+
+_member_email_edit:
+    pattern:  /{_locale}/member/edit/email
+    defaults: { _controller: ITVietSiteBundle:Member\Config:editEmail }
+    requirements:
+        _scheme: http
+        _locale: en
+_vi_member_email_edit:
+    pattern:  /thanh-vien/sua/email
+    defaults: { _controller: ITVietSiteBundle:Member\Config:editEmail, _locale: vi }
+    requirements:
+        _scheme: http
+
+_member_change_email:
+    pattern:  /{_locale}/member/change/email/{token}
+    defaults: { _controller: ITVietSiteBundle:Member\Config:changeEmail }
+    requirements:
+        _scheme: http
+        _locale: en
+_vi_member_change_email:
+    pattern:  /thanh-vien/thay-doi/email/{token}
+    defaults: { _controller: ITVietSiteBundle:Member\Config:changeEmail, _locale: vi }
     requirements:
         _scheme: http
 

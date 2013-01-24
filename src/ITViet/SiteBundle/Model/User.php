@@ -219,4 +219,21 @@ abstract class User implements AdvancedUserInterface, \Serializable
     public function setEnabled($enabled){
         $this->enabled = $enabled;
     }
+
+    public function isCorrectPassword($str) {
+        $encoder = new MessageDigestPasswordEncoder('sha512', true, 10);
+        $hashedStr = $encoder->encodePassword($str, $this->getSalt());
+        return $this->hashedPassword == $hashedStr ? true : false;
+    }
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $emailTemporary;
+    public function getEmailTemporary() {
+        return $this->emailTemporary;
+    }
+    public function setEmailTemporary($str) {
+        $this->emailTemporary = $str;
+    }
 }

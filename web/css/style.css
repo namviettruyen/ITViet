@@ -61,3 +61,12 @@ margin-top: 10px;
 .navbar a.btn.fix {
 margin-top: 0;
 }
+
+select.language option.vi {
+background:url(../images/icon/flags.png) no-repeat 0 -15px;
+padding-left: 30px;
+}
+select.language option.en {
+background:url(../images/icon/flags.png) no-repeat -25px 0;
+padding-left: 30px;
+}

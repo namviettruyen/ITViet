@@ -1,0 +1,57 @@
+<script>
+<!--
+  function checkForm()
+  {
+    var strAlert = "";
+    strAlert = strAlert + VKCheckRequireField(document.frmForm.password, "{% trans %}Please enter your current password.{% endtrans %}\n");
+    strAlert = strAlert + VKCheckRequireField(document.frmForm.member_newemail, "{% trans %}Please enter your new Email/Login ID.{% endtrans %}\n");
+    strAlert = strAlert + VKCheckEmail(document.frmForm.member_newemail, "{% trans %}Your Email/Login ID is not valid. Please re-enter{% endtrans %}!\n");
+    strAlert = strAlert + VKCheckCompareField(document.frmForm.member_newemail, document.frmForm.member_repassword, "{% trans %}Your new Email/Login ID does not match. Please re-enter{% endtrans %}!\n");
+    if(strAlert != "")
+    {
+      alert(strAlert);
+      return false;
+    }
+    else
+    {
+      return true;
+    }
+  }
+-->
+</script>
+
+<form class="form-horizontal" name="frmForm" id="frmForm" action="{{ mlpath('_member_email_edit') }}" method="post">
+  <fieldset>
+    <legend>{% trans %}Change email{% endtrans %}</legend>
+    <div class="control-group">
+      <label class="control-label" for="member_fullName">{% trans %}Current Email{% endtrans %}</label>
+      <div class="controls" style="margin-top:5px">
+        {{ member.email }}
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="password">{% trans %}Password{% endtrans %}</label>
+      <div class="controls">
+        <input type="password" name="password" value="" class="input-xlarge" />
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="member_newemail">{% trans %}New Email{% endtrans %}</label>
+      <div class="controls">
+        <input type="text" name="member_newemail" value="" class="input-xlarge" />
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="member_repassword">{% trans %}Re New Email{% endtrans %}</label>
+      <div class="controls">
+        <input type="text" name="member_repassword" value="" class="input-xlarge" />
+      </div>
+    </div>
+
+    <div class="control-group">
+      <div class="controls">
+        <button class="btn btn-primary" type="submit" onclick="return checkForm();">{% trans %}Save{% endtrans %}</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
