@@ -8,6 +8,7 @@ margin-left: 140px;
 }
 .span2.language {
 margin: 5px 10px 0 0;
+padding-left: 30px;
 float: right;
 }
 
@@ -61,12 +62,26 @@ margin-top: 10px;
 .navbar a.btn.fix {
 margin-top: 0;
 }
-
+select.language option {
+padding-left: 33px;
+}
 select.language option.vi {
-background:url(../images/icon/flags.png) no-repeat 0 -15px;
-padding-left: 30px;
+background:url(../images/icon/flags.png) no-repeat 3px -15px;
 }
 select.language option.en {
+background:url(../images/icon/flags.png) no-repeat -22px 3px;
+}
+.flag {
+display: inline-block;
+width: 25px;
+height: 15px;
+position: absolute;
+right: 120px;
+top: 13px;
+}
+.flag.vi {
+background:url(../images/icon/flags.png) no-repeat 0 -15px;
+}
+.flag.en {
 background:url(../images/icon/flags.png) no-repeat -25px 0;
-padding-left: 30px;
 }

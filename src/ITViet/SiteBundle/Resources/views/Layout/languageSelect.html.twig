@@ -4,6 +4,9 @@
 merge(app.request.query.all)}|
 merge((langAwarePathParams is defined) ? {'langAwareParams':langAwarePathParams} : {}) %}
 
+{% if locale == 'vi' %}<span class="flag vi"></span>{% endif %}
+{% if locale == 'en' %}<span class="flag en"></span>{% endif %}
+
 <select class="span2 language" onChange="location.href=$(this).val();">
   {% for item in getPathsForLocales(pathParams) %}
   <option class="{{ item.locale }}" {% if item.locale == locale %} selected='selected'{% endif %} value='{{ item.path}}'>
