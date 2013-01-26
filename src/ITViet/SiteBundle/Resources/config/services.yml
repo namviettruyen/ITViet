@@ -19,3 +19,9 @@ services:
     it_viet_site.char_converter:
         class: ITViet\SiteBundle\Model\CharConverter
 
+    it_viet_site.login_listener:
+        class: ITViet\SiteBundle\Listener\LoginListener
+        arguments: [@doctrine]
+        tags:
+          - { name: kernel.event_listener, event: security.interactive_login, method: onLogin }
+

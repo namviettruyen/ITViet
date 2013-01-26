@@ -32,7 +32,6 @@ class MemberAuthenticationHandler extends AuthenticationHandler
             } else {
                 $url = $this->generateMlUrl($request, '_member_home', true);
             }
-
             $request->getSession()->setFlash('success', 'Login successfully');
 
             $response = new RedirectResponse($url, 302);

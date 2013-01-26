@@ -198,4 +198,10 @@ class Member extends AbstractUser
         }
     }
 
+    public function setLogInfo() {
+        $this->loginInfo->increaseCount();
+        $this->loginInfo->setLastLogin($this->loginInfo->getCurrentLogin());
+        $this->loginInfo->setCurrentLogin(new \DateTime());
+    }
+
 }

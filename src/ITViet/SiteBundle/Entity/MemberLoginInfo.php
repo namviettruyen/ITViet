@@ -51,14 +51,15 @@ class MemberLoginInfo
         $this->count = $val;
     }
 
-    public function inCreaseCount() {
-        $this->count++;
-    }
 
     /**
      * @ORM\PrePersist
      */
     public function setLastLoginValue() {
         $this->lastLogin = new \DateTime();
+    }
+
+    public function increaseCount() {
+        $this->count++;
     }
 }
