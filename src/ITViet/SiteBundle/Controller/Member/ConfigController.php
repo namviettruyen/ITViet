@@ -23,7 +23,7 @@ class ConfigController extends BaseController
             if ($form->isValid()) {
                 $em->persist($member);
                 $em->flush();
-                $this->get('session')->setFlash('success', $t->trans('Update success'));
+                $this->get('session')->setFlash('success', $t->trans('Your account information has been updated successfully.'));
                 return $this->redirect($this->generateMlUrl('_member_home'));
             }
         }
@@ -38,15 +38,15 @@ class ConfigController extends BaseController
 
     public function editEmailAction() {
         $t = $this->get('translator');
+        $session = $this->get('session');
         $request = $this->getRequest();
         $em = $this->get('doctrine.orm.entity_manager');
         $member = $this->get('security.context')->getToken()->getUser();
 
-        $errorStatus = 0;
         if ($request->getMethod() == 'POST') {
             $password = $request->get('password');
             if (! $member->isCorrectPassword($password)) {
-                $this->get('session')->setFlash('error',$t->trans('Your current password is not correct'));
+                $session->setFlash('error',$t->trans('Your current password is not correct'));
                 return $this->redirect($this->generateMlUrl('_member_home'));
             } else {
                 //check email uniqueness
@@ -54,7 +54,7 @@ class ConfigController extends BaseController
                 $samePerson = $em->getRepository("ITVietSiteBundle:Member")
                   ->findBy(array('email' => $newEmail));
                 if (sizeof($samePerson) > 0) {
-                    $this->get('session')->setFlash('error',$t->trans('Your email already exist'));
+                    $session->setFlash('error',$t->trans('Your email already exist'));
                     return $this->redirect($this->generateMlUrl('_member_home'));
                 } else {
                     $member->generateConfirmationToken();
@@ -75,7 +75,7 @@ class ConfigController extends BaseController
 
                     $em->persist($member);
                     $em->flush();
-                    $this->get('session')->setFlash('success',$t->trans("Please check your new email {$newEmail} to approve your change"));
+                    $session->setFlash('success',$t->trans("Please check your new email {$newEmail} to approve your change"));
                     return $this->redirect($this->generateMlUrl('_member_home'));
                 }
             }
@@ -105,7 +105,7 @@ class ConfigController extends BaseController
 
             $em->persist($member);
             $em->flush();
-            $this->get('session')->setFlash('success',$t->trans("Your email has been changed successfully"));
+            $this->get('session')->setFlash('success',$t->trans('Your account information has been updated successfully.'));
             return $this->redirect($this->generateMlUrl('_member_login'));
 
             //logout old account
@@ -115,5 +115,52 @@ class ConfigController extends BaseController
         }
 
         return $this->redirect($this->generateMlUrl('_member_login'));
+    }
+
+    public function editPasswordAction() {
+        $t = $this->get('translator');
+        $request = $this->getRequest();
+        $session = $this->get('session');
+        $em = $this->get('doctrine.orm.entity_manager');
+        $member = $this->get('security.context')->getToken()->getUser();
+
+        if ($request->getMethod() == 'POST') {
+            $password = $request->request->get('old_password');
+            if (! $member->isCorrectPassword($password)) {
+                $session->setFlash('error', $t->trans('Your Old password is not match'));
+                return $this->redirect($this->generateMlUrl('_member_home'));
+            } else {
+                $newPassword = $request->request->get('new_password');
+                $reNewPassword = $request->request->get('re_new_password');
+
+                if ($newPassword) {
+                    if ($newPassword == $reNewPassword) {
+                        $member->setPassword($newPassword);
+                        $em->persist($member);
+                        $em->flush();
+
+                        $jumpTo = $this->generateMlUrl('_member_login');
+
+                        //let user log-out
+                        $request->getSession()->invalidate();
+                        $this->get('security.context')->setToken(null);
+
+                        $session->setFlash('success', $t->trans('Your account information has been updated successfully.'));
+                        return $this->redirect($jumpTo);
+
+                    } else {
+                        $session->setFlash('error', $t->trans('Your new password does not match. Please re-enter'));
+                    }
+                } else {
+                    throw new \Exception('Empty form');
+                }
+            }
+
+        }
+
+        $res = $this->render('ITVietSiteBundle:Member\\Config:editPassword.html.twig');
+        $res->setSharedMaxAge(30);
+        $res->setPublic();
+        return $res;
     }
 }

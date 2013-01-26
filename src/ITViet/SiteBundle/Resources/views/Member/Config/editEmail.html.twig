@@ -1,6 +1,6 @@
 <script>
 <!--
-  function checkForm()
+  function checkFormEmail()
   {
     var strAlert = "";
     strAlert = strAlert + VKCheckRequireField(document.frmForm.password, "{% trans %}Please enter your current password.{% endtrans %}\n");
@@ -35,6 +35,7 @@
         <input type="password" name="password" value="" class="input-xlarge" />
       </div>
     </div>
+    <hr />
     <div class="control-group">
       <label class="control-label" for="member_newemail">{% trans %}New Email{% endtrans %}</label>
       <div class="controls">
@@ -50,7 +51,7 @@
 
     <div class="control-group">
       <div class="controls">
-        <button class="btn btn-primary" type="submit" onclick="return checkForm();">{% trans %}Save{% endtrans %}</button>
+        <button class="btn btn-primary" type="submit" onclick="return checkFormEmail();">{% trans %}Save{% endtrans %}</button>
       </div>
     </div>
   </fieldset>

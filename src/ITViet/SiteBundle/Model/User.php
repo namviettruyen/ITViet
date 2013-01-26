@@ -45,11 +45,6 @@ abstract class User implements AdvancedUserInterface, \Serializable
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    protected $passwordRequestedAt;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
     protected $emailChangeRequestedAt;
 
     /**
@@ -92,13 +87,6 @@ abstract class User implements AdvancedUserInterface, \Serializable
 
     public function getConfirmationToken() {
         return $this->confirmationToken;
-    }
-
-    public function setPasswordRequestedAt(\DateTime $date) {
-        $this->passwordRequestedAt = $date;
-    }
-    public function getPasswordRequestedAt() {
-        return $this->passwordRequestedAt;
     }
 
     public function setEmailChangeRequestedAt(\DateTime $date) {

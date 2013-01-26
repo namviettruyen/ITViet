@@ -178,3 +178,15 @@ _vi_member_change_email:
     requirements:
         _scheme: http
 
+_member_pass_edit:
+    pattern:  /{_locale}/member/edit/pass
+    defaults: { _controller: ITVietSiteBundle:Member\Config:editPassword }
+    requirements:
+        _scheme: http
+        _locale: en
+_vi_member_pass_edit:
+    pattern:  /thanh-vien/sua/pass
+    defaults: { _controller: ITVietSiteBundle:Member\Config:editPassword, _locale: vi }
+    requirements:
+        _scheme: http
+
