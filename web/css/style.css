@@ -85,3 +85,19 @@ background:url(../images/icon/flags.png) no-repeat 0 -15px;
 .flag.en {
 background:url(../images/icon/flags.png) no-repeat -25px 0;
 }
+
+.member-profile {
+float: right;
+height: 180px;
+width: 450px;
+overflow-y: auto;
+background-color: #F8F8F8;
+border-radius: 3px 3px 3px 3px;
+padding: 5px;
+}
+.full-name span {
+float: right;
+}
+.full-name span i {
+margin-top: 5px;
+}

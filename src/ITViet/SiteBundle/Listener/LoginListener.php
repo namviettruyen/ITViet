@@ -20,8 +20,6 @@ class LoginListener
             $em = $this->doctrine->getEntityManager();
             $em->flush();
         }
-
-
     }
 }
 

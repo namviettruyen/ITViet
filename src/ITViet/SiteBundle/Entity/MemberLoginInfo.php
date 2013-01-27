@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\HasLifecycleCallbacks()
  */
 
 class MemberLoginInfo
@@ -51,10 +50,6 @@ class MemberLoginInfo
         $this->count = $val;
     }
 
-
-    /**
-     * @ORM\PrePersist
-     */
     public function setLastLoginValue() {
         $this->lastLogin = new \DateTime();
     }

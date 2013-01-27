@@ -190,3 +190,14 @@ _vi_member_pass_edit:
     requirements:
         _scheme: http
 
+_member_profile_edit:
+    pattern: /{_locale}/member/edit/profile
+    defaults: { _controller: ITVietSiteBundle:Member\Config:editProfile }
+    requirements:
+        _scheme: http
+        _locale: en
+_vi_member_profile_edit:
+    pattern: /thanh-vien/sua/profile
+    defaults: { _controller: ITVietSiteBundle:Member\Config:editProfile, _locale: vi }
+    requirements:
+        _scheme: http

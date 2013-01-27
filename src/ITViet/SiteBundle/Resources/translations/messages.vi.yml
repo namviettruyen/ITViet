@@ -40,3 +40,17 @@
 
 'Change email': 'Thay đổi email'
 'Change password': 'Thay đổi mật khẩu'
+
+'Current Email': 'Email hiện tại'
+'New Email': 'Email mới'
+'Re New Email': 'Nhập lại Email mới'
+'Old password': 'Mật khẩu cũ'
+'New password': 'Mật khẩu mới'
+'Re new password': 'Nhập lại mật khẩu mới'
+'Your current password is not correct': 'Mật khẩu hiện tại của bạn không đúng'
+'This email address was used.': 'Địa chỉ email này đã được sử dụng.'
+'The email address is still available.': 'Có thể sử dụng địa chỉ email này'
+'Your account information has been updated successfully.': 'Thông tin tài khoản của bạn được cập nhật thành công'
+
+'Profile manager': 'Mô tả bản thân'
+'Introducing': 'Giới thiệu'

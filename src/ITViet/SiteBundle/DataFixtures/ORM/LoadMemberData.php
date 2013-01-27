@@ -4,14 +4,25 @@ namespace ITViet\SiteBundle\DataFixtures\ORM;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 
 use ITViet\SiteBundle\Entity\Member;
 use ITViet\SiteBundle\Entity\MemberLoginInfo;
+use ITViet\SiteBundle\Entity\Category;
 
-class LoadMemberData extends AbstractFixture implements OrderedFixtureInterface
+class LoadMemberData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
+    protected $container;
+    public function setContainer(ContainerInterface $container = null) {
+        $this->container = $container;
+    }
     public function load(ObjectManager $em)
     {
+        ///////////////////////////
+        //member
+        ///////////////////////////
+
         $users = array();
         for($i=1; $i<=20; $i++) {
             $member = new Member();
@@ -34,6 +45,33 @@ class LoadMemberData extends AbstractFixture implements OrderedFixtureInterface
             $em->persist($member);
             $em->flush();
         }
+
+        ///////////////////////////
+        //category
+        ///////////////////////////
+
+        $arrCategories = array(
+          array('Công nghệ phần mềm', true),
+          array('Mạng máy tính', true),
+          array('Đồ họa', true),
+          array('Học tập', false),
+        );
+
+        $urlSlugger = $this->container->get('it_viet_site.url_slugger');
+        $slugParams = array('toascii'=>true, 'tolower'=>true);
+
+        foreach($arrCategories as $n => $category) {
+            list($name, $isActive) = $category;
+
+            $category = new Category();
+            $category->setName($name);
+            $category->setUrlPart($urlSlugger->slug($name, $slugParams));
+            $category->setIsActive($isActive);
+
+            $em->persist($category);
+            $em->flush();
+        }
+
     }
 
     public function getOrder() {

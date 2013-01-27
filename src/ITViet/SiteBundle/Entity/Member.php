@@ -204,4 +204,19 @@ class Member extends AbstractUser
         $this->loginInfo->setCurrentLogin(new \DateTime());
     }
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    protected $profileDescription;
+    public function getProfileDescription() {
+        return $this->profileDescription;
+    }
+    public function setProfileDescription($val) {
+        $this->profileDescription = $val;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="Article", mappedBy="member")
+     */
+    protected $articles;
 }

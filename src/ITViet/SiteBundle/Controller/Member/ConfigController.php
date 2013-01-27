@@ -54,7 +54,7 @@ class ConfigController extends BaseController
                 $samePerson = $em->getRepository("ITVietSiteBundle:Member")
                   ->findBy(array('email' => $newEmail));
                 if (sizeof($samePerson) > 0) {
-                    $session->setFlash('error',$t->trans('Your email already exist'));
+                    $session->setFlash('error',$t->trans('This email address was used.'));
                     return $this->redirect($this->generateMlUrl('_member_home'));
                 } else {
                     $member->generateConfirmationToken();
@@ -159,6 +159,36 @@ class ConfigController extends BaseController
         }
 
         $res = $this->render('ITVietSiteBundle:Member\\Config:editPassword.html.twig');
+        $res->setSharedMaxAge(30);
+        $res->setPublic();
+        return $res;
+    }
+
+    public function editProfileAction() {
+        $t = $this->get('translator');
+        $request = $this->getRequest();
+        $session = $this->get('session');
+        $member = $this->get('security.context')->getToken()->getUser();
+
+        if ($request->getMethod() == 'POST') {
+            $content = $request->request->get('editor1');
+
+            if (strlen(strip_tags($content)) < 10) {
+                $session->setFlash('error', $t->trans('Content must larger 10 character'));
+            } elseif ($content != $member->getProfileDescription()) {
+                $em = $this->get('doctrine.orm.entity_manager');
+                $member->setProfileDescription($content);
+                $em->persist($member);
+                $em->flush();
+                $session->setFlash('success', $t->trans('Your account information has been updated successfully.'));
+            }
+
+            return $this->redirect($this->generateMlUrl('_member_home'));
+        }
+
+        $res = $this->render('ITVietSiteBundle:Member\\Config:editProfile.html.twig', array(
+          'member' => $member,
+        ));
         $res->setSharedMaxAge(30);
         $res->setPublic();
         return $res;
