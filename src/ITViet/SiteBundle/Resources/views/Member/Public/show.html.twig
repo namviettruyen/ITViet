@@ -1,0 +1,11 @@
+{% extends 'ITVietSiteBundle::layout.html.twig' %}
+
+{% block navigator %}
+  {% include 'ITVietSiteBundle::navigator.html.twig' with {'active':'none'} %}
+{% endblock %}
+
+{% block title %}{% trans %}Member{% endtrans %} {{ member.fullName }} - ITViet{% endblock %}
+
+{% block maincontents %}
+  {% include 'ITVietSiteBundle:Member:publicInfo.html.twig' with {'member': member} %}
+{% endblock %}

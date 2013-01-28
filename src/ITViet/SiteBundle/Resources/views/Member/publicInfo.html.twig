@@ -1,0 +1,40 @@
+<h4 class="full-name">{{ member.fullName }} 
+  <span class="muted"><i class="icon-user"></i> {% trans %}Introducing{% endtrans %}</span>
+</h4>
+
+<div class="profile group">
+  <div class="gravatar">
+    <a href="{{ mlpath('_member_public_show', {'id': member.id, 'name': member.fullNameSlug }) }}">
+      <img class="img-polaroid" src="{{ member.getGravatar }}" alt="{{ member.fullName }}" />
+    </a>
+    <div>432EXP</div>
+  </div>
+  <div class="data">
+    <table>
+      <tr>
+        <td width="30%">{% trans %}From{% endtrans %}:</td>
+        <td>{{ member.address }}</td>
+      </tr>
+      <tr>
+        <td>{% trans %}Register{% endtrans %}:</td>
+        <td>{{ member.since|date('d-m-Y') }}</td>
+      </tr>
+      <tr>
+        <td>{% trans %}Gender{% endtrans %}:</td>
+        <td>
+          {% if member.gender == 'M' %}{% trans %}Male{% endtrans %}
+          {% else %}{% trans %}Female{% endtrans %}
+          {% endif %}
+        </td>
+      </tr>
+      <tr>
+        <td>{% trans %}Age{% endtrans %}:</td>
+        <td>{{ date()|date('Y') - member.birthDate|date('Y') }}</td>
+      </tr>
+    </table>
+  </div>
+</div> {# end profile group #}
+
+<div class="member-profile">
+  {{ member.profileDescription|raw }}
+</div>

@@ -142,13 +142,13 @@ _member_logout:
     requirements:
         _scheme: http
 
-_member_profile_edit:
+_member_info_edit:
     pattern:  /{_locale}/member/edit
     defaults: { _controller: ITVietSiteBundle:Member\Config:editInfo }
     requirements:
         _scheme: http
         _locale: en
-_vi_member_profile_edit:
+_vi_member_info_edit:
     pattern:  /thanh-vien/sua
     defaults: { _controller: ITVietSiteBundle:Member\Config:editInfo, _locale: vi }
     requirements:
@@ -201,3 +201,19 @@ _vi_member_profile_edit:
     defaults: { _controller: ITVietSiteBundle:Member\Config:editProfile, _locale: vi }
     requirements:
         _scheme: http
+
+############################################################
+
+_member_public_show:
+    pattern:  /{_locale}/member-show/{id}/{name}
+    defaults: { _controller: ITVietSiteBundle:Member\Public:show }
+    requirements:
+        _scheme: http
+        _locale: en
+_vi_member_public_show:
+    pattern:  /xem-thanh-vien/{id}/{name}
+    defaults: { _controller: ITVietSiteBundle:Member\Public:show, _locale: vi }
+    requirements:
+        _scheme: http
+
+

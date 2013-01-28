@@ -5,6 +5,7 @@ namespace ITViet\SiteBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use ITViet\SiteBundle\Model\User as AbstractUser;
 use ITViet\SiteBundle\Model\CharConverter;
+use ITViet\SiteBundle\Model\Utils as Utils;
 
 /**
  * @ORM\Entity(repositoryClass="ITViet\SiteBundle\Repository\MemberRepository")
@@ -130,6 +131,7 @@ class Member extends AbstractUser
 
     /**
      * @ORM\PrePersist
+     * @ORM\PreUpdate
      */
     public function updateMetaInfo() {
         $this->fullNameInAscii = $this->getSearchableInAscii($this->fullName);
@@ -219,4 +221,8 @@ class Member extends AbstractUser
      * @ORM\OneToMany(targetEntity="Article", mappedBy="member")
      */
     protected $articles;
+
+    public function getFullNameSlug() {
+        return Utils::slugify($this->fullNameInAscii);
+    }
 }
