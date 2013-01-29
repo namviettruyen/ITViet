@@ -160,11 +160,13 @@ _member_email_edit:
     requirements:
         _scheme: http
         _locale: en
+        _method: post
 _vi_member_email_edit:
     pattern:  /thanh-vien/sua/email
     defaults: { _controller: ITVietSiteBundle:Member\Config:editEmail, _locale: vi }
     requirements:
         _scheme: http
+        _method: post
 
 _member_change_email:
     pattern:  /{_locale}/member/change/email/{token}
@@ -172,11 +174,13 @@ _member_change_email:
     requirements:
         _scheme: http
         _locale: en
+        _method: post
 _vi_member_change_email:
     pattern:  /thanh-vien/thay-doi/email/{token}
     defaults: { _controller: ITVietSiteBundle:Member\Config:changeEmail, _locale: vi }
     requirements:
         _scheme: http
+        _method: post
 
 _member_pass_edit:
     pattern:  /{_locale}/member/edit/pass
@@ -184,11 +188,13 @@ _member_pass_edit:
     requirements:
         _scheme: http
         _locale: en
+        _method: post
 _vi_member_pass_edit:
     pattern:  /thanh-vien/sua/pass
     defaults: { _controller: ITVietSiteBundle:Member\Config:editPassword, _locale: vi }
     requirements:
         _scheme: http
+        _method: post
 
 _member_profile_edit:
     pattern: /{_locale}/member/edit/profile
@@ -196,11 +202,13 @@ _member_profile_edit:
     requirements:
         _scheme: http
         _locale: en
+        _method: post
 _vi_member_profile_edit:
     pattern: /thanh-vien/sua/profile
     defaults: { _controller: ITVietSiteBundle:Member\Config:editProfile, _locale: vi }
     requirements:
         _scheme: http
+        _method: post
 
 ############################################################
 
@@ -216,4 +224,17 @@ _vi_member_public_show:
     requirements:
         _scheme: http
 
+
+_member_post_article:
+    pattern: /{_locale}/member/article/new
+    defaults: { _controller: ITVietSiteBundle:Member\Article:new }
+    requirements:
+        _scheme: http
+        _locale: en
+
+_vi_member_post_article:
+    pattern: /thanh-vien/bai-viet/moi
+    defaults: { _controller: ITVietSiteBundle:Member\Article:new, _locale: vi }
+    requirements:
+        _scheme: http
 

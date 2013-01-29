@@ -10,6 +10,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use ITViet\SiteBundle\Entity\Member;
 use ITViet\SiteBundle\Entity\MemberLoginInfo;
 use ITViet\SiteBundle\Entity\Category;
+use ITViet\SiteBundle\Entity\Article;
 
 class LoadMemberData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
@@ -35,6 +36,7 @@ class LoadMemberData extends AbstractFixture implements OrderedFixtureInterface,
             $member->setAddress('Pleiku Gialai');
             $member->setEnabled(true);
             $member->setPassword('123456');
+            $member->setProfileDescription('Xin chao tat ca moi nguoi!!!');
 
             $logininfo = new MemberLoginInfo();
             $logininfo->setCount(0);
@@ -43,7 +45,7 @@ class LoadMemberData extends AbstractFixture implements OrderedFixtureInterface,
 
             $em->persist($logininfo);
             $em->persist($member);
-            $em->flush();
+            $users[$i-1] = $member;
         }
 
         ///////////////////////////
@@ -57,21 +59,28 @@ class LoadMemberData extends AbstractFixture implements OrderedFixtureInterface,
           array('Học tập', false),
         );
 
-        $urlSlugger = $this->container->get('it_viet_site.url_slugger');
-        $slugParams = array('toascii'=>true, 'tolower'=>true);
-
+        $categories = array();
         foreach($arrCategories as $n => $category) {
             list($name, $isActive) = $category;
 
             $category = new Category();
             $category->setName($name);
-            $category->setUrlPart($urlSlugger->slug($name, $slugParams));
             $category->setIsActive($isActive);
 
             $em->persist($category);
-            $em->flush();
+            $categories[$n] = $category;
         }
 
+        for($i = 1; $i <= count($users); $i++) {
+            $article = new Article();
+            $article->setMember($users[$i - 1]);
+            $article->setCategory($categories[$i % 4]);
+            $article->setTitle('Bài viết Ấn tượng nhất'.$i);
+            $article->setContent('Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... ');
+            $em->persist($article);
+        }
+
+        $em->flush();
     }
 
     public function getOrder() {

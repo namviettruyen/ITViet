@@ -12,10 +12,12 @@ class HomeController extends BaseController
      */
     public function indexAction()
     {
-        //$memberService = $this->get('it_viet_site.member_service');
+        $em = $this->get('doctrine.orm.entity_manager');
         $member = $this->get('security.context')->getToken()->getUser();
+        $articles = $em->getRepository('ITVietSiteBundle:Article')->getArticles($member->getId());
         return array(
           'member' => $member,
+          'articles' => $articles,
         );
     }
 }

@@ -1,6 +1,6 @@
 <form class="form-horizontal" name="frmForm" id="frmForm" action="{{ mlpath('_member_profile_edit') }}" method="post">
   <fieldset>
-    <legend>{% trans %}Change Profile{% endtrans %}</legend>
+    <legend>{% trans %}Profile manager{% endtrans %}</legend>
     <div class="control-group">
       <textarea class="ckeditor" cols="80" id="editor1" name="editor1" rows="10">
         {{ member.profileDescription }}

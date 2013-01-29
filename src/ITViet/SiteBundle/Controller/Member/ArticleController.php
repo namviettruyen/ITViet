@@ -3,7 +3,7 @@
 namespace ITViet\SiteBundle\Controller\Member;
 
 use ITViet\SiteBundle\Controller\BaseController;
-use ITViet\SiteBundle\Form\Types\ArticleNewType;
+use ITViet\SiteBundle\Form\Type\ArticleNewType;
 use ITViet\SiteBundle\Entity\Article;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;

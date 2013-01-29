@@ -1,0 +1,23 @@
+{% set ckeditor = true %}
+{% extends 'ITVietSiteBundle::layout.html.twig' %}
+
+{% block navigator %}
+  {% include 'ITVietSiteBundle::navigator.html.twig' with {'active':'profile'} %}
+{% endblock %}
+
+{% block title %}{% trans %}Post New Article{% endtrans %}{% endblock %}
+
+{% block maincontents %}
+
+<form class="form-horizontal" name="fmRegister" id="fmRegister" action="{{ mlpath('_register') }}" method="post" {{ form_enctype(form) }}>
+  {{ form_errors(form) }}
+  <fieldset>
+    <legend>{% trans %}Post New Article{% endtrans %}</legend>
+    <div class="control-group">
+      <label class="control-label" for="member_title">{% trans %}Title{% endtrans %}</label>
+      <div class="controls">
+        {{ form_widget(form.title, {'attr': {'class':'input-xlarge'}}) }}
+      </div>
+    </div>
+  </fieldset>
+{% endblock %}

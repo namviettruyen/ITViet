@@ -12,7 +12,7 @@
   {% include 'ITVietSiteBundle:Member:publicInfo.html.twig' with {'member': member} %}
 
 <ul id="myTab" class="nav nav-tabs">
-  <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+  <li class="active"><a href="#home" data-toggle="tab">{% trans %}My Articles{% endtrans %}</a></li>
   <li><a href="#profile" data-toggle="tab">{% trans %}Profile manager{% endtrans %}</a></li>
   <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans %}Manager Account{% endtrans %} <b class="caret"></b></a>
@@ -26,12 +26,37 @@
 
 <div id="myTabContent" class="tab-content">
   <div class="tab-pane fade in active" id="home">
-    <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+
+<form class="form-horizontal" name="frmForm" id="frmForm" action="#" method="post">
+  <fieldset>
+    <legend>{% trans %}My Articles{% endtrans %}</legend>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>{% trans %}Title{% endtrans %}</th>
+          <th>{% trans %}Posted At{% endtrans %}</th>
+          <th>{% trans %}Category{% endtrans %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for article in articles %}
+        <tr>
+          <td>1</td>
+          <td>{{ article.title }}</td>
+          <td>{{ article.postedAt | date("d-m-Y") }}</td>
+          <td>{{ article.category.name }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <a class="btn btn-primary" href="{{ mlpath('_member_post_article') }}">{% trans %}Post New Article{% endtrans %}</a>
+    <button class="btn" type="submit">{% trans %}Delete Article{% endtrans %}</button>
+  </fieldset>
+</form>
+
   </div>
   <div class="tab-pane fade" id="profile">
-{#
-    {% render 'ITVietSiteBundle:Member\\Config:editProfile' with {'standalone': true} %}
-#}
     {% include 'ITVietSiteBundle:Member\\Config:editProfile.html.twig' %}
   </div>
   <div class="tab-pane fade" id="dropdown1">

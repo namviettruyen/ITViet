@@ -3,12 +3,15 @@
 namespace ITViet\SiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use ITViet\SiteBundle\Model\UrlSlugger;
+use ITViet\SiteBundle\Model\CharConverter;
 
 /**
  * ITViet\SiteBundle\Entity\Category
  *
  * @ORM\Table()
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
  */
 class Category
 {
@@ -198,4 +201,16 @@ class Category
      * @ORM\OneToMany(targetEntity="Article", mappedBy="category")
      */
     protected $articles;
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function setUrlPathValue() {
+        //TODO using listener instead of
+        $charConverter = new CharConverter();
+        $urlSlugger = new UrlSlugger($charConverter);
+        $slugParams = array('toascii' => true, 'tolower' => true);
+        $this->urlPart = $urlSlugger->slug($this->name, $slugParams);
+    }
 }

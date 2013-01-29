@@ -3,12 +3,14 @@
 namespace ITViet\SiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use ITViet\SiteBundle\Model\UrlSlugger;
+use ITViet\SiteBundle\Model\CharConverter;
 
 /**
  * ITViet\SiteBundle\Entity\Article
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ITViet\SiteBundle\Repository\ArticleRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class Article
@@ -270,11 +272,57 @@ class Article
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     protected $category;
+    public function getCategory() {
+        return $this->category;
+    }
+    public function setCategory($category) {
+        $this->category = $category;
+    }
 
     /**
      * @ORM\ManyToOne(targetEntity="Member", inversedBy="articles")
      * @ORM\JoinColumn(name="member_id", referencedColumnName="id")
      */
     protected $member;
+    public function getMember() {
+        return $this->member;
+    }
+    public function setMember($member) {
+        $this->member = $member;
+    }
+
+    /**
+     * @ORM\Column(name="content", type="text")
+     */
+    private $content;
+    public function getContent() {
+        return $this->content;
+    }
+    public function setContent($content) {
+        $this->content = $content;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function setUrlPathValue() {
+        //TODO using listener instead of
+        $charConverter = new CharConverter();
+        $urlSlugger = new UrlSlugger($charConverter);
+        $slugParams = array('toascii' => true, 'tolower' => true);
+        $this->urlPart = $urlSlugger->slug($this->title, $slugParams);
+    }
+
+    /**
+     * @ORM\Column(name="isDeleted", type="boolean")
+     */
+    private $isDeleted = false;
+    public function getIsDeleted() {
+        return $this->isDeleted;
+    }
+    public function setIsDeleted($val) {
+        $this->isDeleted = $val;
+    }
 
 }
