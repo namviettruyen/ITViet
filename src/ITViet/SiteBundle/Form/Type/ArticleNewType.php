@@ -11,7 +11,11 @@ class ArticleNewType extends AbstractType
 {
     public function buildForm(FormBuilder $builder, array $option) {
         $builder
-          ->add('title', 'text');
+          ->add('category')
+          ->add('title', 'text')
+          ->add('isActive', 'choice', array('choices' => Choices::$active, 'multiple' => false))
+          ->add('content', 'textarea', array('required' => false));
+
     }
     public function getName() {
         return 'member';

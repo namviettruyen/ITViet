@@ -9,15 +9,41 @@
 
 {% block maincontents %}
 
-<form class="form-horizontal" name="fmRegister" id="fmRegister" action="{{ mlpath('_register') }}" method="post" {{ form_enctype(form) }}>
+<form class="form-horizontal" name="fmRegister" id="fmRegister" action="" method="post" {{ form_enctype(form) }}>
   {{ form_errors(form) }}
   <fieldset>
     <legend>{% trans %}Post New Article{% endtrans %}</legend>
     <div class="control-group">
-      <label class="control-label" for="member_title">{% trans %}Title{% endtrans %}</label>
+      <label class="control-label" for="member_category">{% trans %}Category{% endtrans %}</label>
       <div class="controls">
-        {{ form_widget(form.title, {'attr': {'class':'input-xlarge'}}) }}
+        {{ form_widget(form.category, {'attr': {'class':'input-xlarge'}}) }}
       </div>
     </div>
+
+    <div class="control-group">
+      <label class="control-label" for="member_title">{% trans %}Title{% endtrans %}</label>
+      <div class="controls">
+        {{ form_widget(form.title, {'attr': {'class':'input-xxlarge'}}) }}
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="member_isActive">{% trans %}Active{% endtrans %}</label>
+      <div class="controls">
+        {{ form_widget(form.isActive, {'attr': {'class':'input-small'}}) }}
+      </div>
+    </div>
+
+    <div class="control-group">
+      {{ form_widget(form.content, {'attr': {'class':'ckeditor', 'cols': '80', 'rows': '10', 'name': 'content'}}) }}
+    </div>
+
+    <div class="control-group">
+      <div class="controls">
+        <button class="btn btn-primary" type="submit">{% trans %}Post{% endtrans %}</button>
+      </div>
+    </div>
+
   </fieldset>
+</form>
 {% endblock %}

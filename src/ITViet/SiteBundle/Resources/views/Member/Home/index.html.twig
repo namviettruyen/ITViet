@@ -37,6 +37,7 @@
           <th>{% trans %}Title{% endtrans %}</th>
           <th>{% trans %}Posted At{% endtrans %}</th>
           <th>{% trans %}Category{% endtrans %}</th>
+          <th>{% trans %}Active{% endtrans %}</th>
         </tr>
       </thead>
       <tbody>
@@ -46,6 +47,7 @@
           <td>{{ article.title }}</td>
           <td>{{ article.postedAt | date("d-m-Y") }}</td>
           <td>{{ article.category.name }}</td>
+          <td>{{ article.isActive ? 'Yes' : 'No' }}</td>
         </tr>
         {% endfor %}
       </tbody>

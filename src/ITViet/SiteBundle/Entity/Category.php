@@ -213,4 +213,8 @@ class Category
         $slugParams = array('toascii' => true, 'tolower' => true);
         $this->urlPart = $urlSlugger->slug($this->name, $slugParams);
     }
+
+    public function __toString() {
+        return $this->name;
+    }
 }

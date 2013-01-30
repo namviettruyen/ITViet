@@ -110,7 +110,7 @@ _member_to_login:
     requirements:
         _scheme: http
         _locale: en|vi
-_member_login:
+_en_member_login:
     pattern:  /{_locale}/login
     defaults: { _controller: ITVietSiteBundle:Login:member }
     requirements:
