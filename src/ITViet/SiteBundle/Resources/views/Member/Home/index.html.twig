@@ -47,7 +47,7 @@
           <td>{{ article.title }}</td>
           <td>{{ article.postedAt | date("d-m-Y") }}</td>
           <td>{{ article.category.name }}</td>
-          <td>{{ article.isActive ? 'Yes' : 'No' }}</td>
+          <td>{% set active = article.isActive ? 'Yes' : 'No' %}{{ active|trans }}</td>
         </tr>
         {% endfor %}
       </tbody>
