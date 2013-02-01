@@ -12,6 +12,8 @@ class TopController extends Controller
      */
     public function indexAction()
     {
-        return array('name' => 'HelloWorld');
+        $em = $this->get('doctrine.orm.entity_manager');
+        $articles = $em->getRepository('ITVietSiteBundle:Article')->getArticles();
+        return array('articles' => $articles);
     }
 }

@@ -107,3 +107,18 @@ margin-top: 5px;
 background-color: #333;
 color: white;
 }
+
+.main-sidebar, .main-content, .main-wall {
+}
+.main-sidebar {
+width: 20%;
+float: left;
+}
+.main-content {
+width: 55%;
+margin-left: 22.5%;
+}
+.main-wall {
+width: 20%;
+float: right;
+}

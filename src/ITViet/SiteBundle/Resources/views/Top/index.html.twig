@@ -8,5 +8,19 @@
 
 {% block maincontents %}
 <h1>Welcome!</h1>
-{{ name }}
+<div class="clearfix">
+  <div class="main-sidebar">
+    Bai viet moi nhat<br>
+    Bai viet theo chu de<br>
+    ...<br>
+  </div>
+  <div class="main-wall">
+    Wall for people chat...
+  </div>
+  <div class="main-content">
+    {% for article in articles %}
+      {{ article.title }}<br />
+    {% endfor %}
+  </div>
+</div>
 {% endblock %}
