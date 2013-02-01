@@ -16,6 +16,10 @@ class ArticleController extends BaseController
      */
     public function newAction(Request $request)
     {
+        $member = $this->get('security.context')->getToken()->getUser();
+        if (!$member) {
+            throw $this->createNotFoundException('You have to login first');
+        }
         $t = $this->get('translator');
         $article = new Article();
         $form = $this->createForm(new ArticleNewType(), $article);
@@ -28,11 +32,11 @@ class ArticleController extends BaseController
 
             if ($form->isValid()) {
                 $em = $this->get('doctrine.orm.entity_manager');
-                $article->setPostedAt(new \DateTime());
-                $article->updateMetaInfo($this->container);
+                $article->setMember($member);
                 $em->persist($article);
                 $em->flush();
                 $this->get('session')->setFlash('success', $t->trans('Post new article success'));
+                return $this->redirect($this->generateMlUrl('_member_home'));
             }
         }
 

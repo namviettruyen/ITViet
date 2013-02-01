@@ -225,14 +225,14 @@ _vi_member_public_show:
         _scheme: http
 
 
-_member_post_article:
+_article_new:
     pattern: /{_locale}/member/article/new
     defaults: { _controller: ITVietSiteBundle:Member\Article:new }
     requirements:
         _scheme: http
         _locale: en
 
-_vi_member_post_article:
+_vi_article_new:
     pattern: /thanh-vien/bai-viet/moi
     defaults: { _controller: ITVietSiteBundle:Member\Article:new, _locale: vi }
     requirements:

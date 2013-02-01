@@ -80,6 +80,16 @@ class LoadMemberData extends AbstractFixture implements OrderedFixtureInterface,
             $em->persist($article);
         }
 
+        // article
+        for ($i = 1; $i <= 10; $i++) {
+            $article = new Article();
+            $article->setMember($users[0]);
+            $article->setCategory($categories[$i % 4]);
+            $article->setTitle('Bài viết Ấn tượng nhất'.$i);
+            $article->setContent('Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... ');
+            $em->persist($article);
+        }
+
         $em->flush();
     }
 

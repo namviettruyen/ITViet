@@ -31,7 +31,7 @@
   <fieldset>
     <legend>{% trans %}My Articles{% endtrans %}</legend>
     <table class="table table-hover">
-      <thead>
+      <thead class="tb-confident">
         <tr>
           <th>#</th>
           <th>{% trans %}Title{% endtrans %}</th>
@@ -52,7 +52,7 @@
         {% endfor %}
       </tbody>
     </table>
-    <a class="btn btn-primary" href="{{ mlpath('_member_post_article') }}">{% trans %}Post New Article{% endtrans %}</a>
+    <a class="btn btn-primary" href="{{ mlpath('_article_new') }}">{% trans %}Post New Article{% endtrans %}</a>
     <button class="btn" type="submit">{% trans %}Delete Article{% endtrans %}</button>
   </fieldset>
 </form>

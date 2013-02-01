@@ -7,9 +7,36 @@
 
 {% block title %}{% trans %}Post New Article{% endtrans %}{% endblock %}
 
-{% block maincontents %}
+{% form_theme form _self %}
+{% block field_errors %}
+  {% if errors %}
+  <div class="alert alert-error">
+    {% for error in errors %}
+    <p>{{ error.messageTemplate | trans(error.messageParameters, 'validators') }}</p>
+    {% endfor %}
+  </div>
+  {% endif %}
+{% endblock %}
 
-<form class="form-horizontal" name="fmRegister" id="fmRegister" action="" method="post" {{ form_enctype(form) }}>
+{% block maincontents %}
+<script>
+<!--
+function checkForm() {
+  var strAlert = "";
+  strAlert = strAlert + VKCheckRequireField(document.getElementById("member_title"), "{% trans %}Please enter your title{% endtrans %}!\n");
+
+  if(strAlert != "") {
+    alert(strAlert);
+    return false;
+  } else {
+    return true;
+  }
+}
+-->
+</script>
+
+
+<form class="form-horizontal" name="fmRegister" id="fmRegister" action="{{ mlpath('_article_new') }}" method="post" {{ form_enctype(form) }}>
   {{ form_errors(form) }}
   <fieldset>
     <legend>{% trans %}Post New Article{% endtrans %}</legend>
@@ -40,10 +67,11 @@
 
     <div class="control-group">
       <div class="controls">
-        <button class="btn btn-primary" type="submit">{% trans %}Post{% endtrans %}</button>
+        <button class="btn btn-primary" type="submit" onclick="return checkForm();">{% trans %}Post{% endtrans %}</button>
       </div>
     </div>
 
   </fieldset>
+  {{ form_rest(form) }}
 </form>
 {% endblock %}
