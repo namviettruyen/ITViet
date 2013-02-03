@@ -1,0 +1,27 @@
+<div class="main-sidebar">
+  <ul class="nav nav-tabs nav-stacked nav-fix">
+    <li {% if active == 'latest' %}class="active"{% endif %}>
+      <a href="#">{% trans %}Latest articles{% endtrans %}</a>
+    </li>
+  </ul>
+  <div class="accordion" id="accordion2">
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+          <span>&#43;</span> {% trans %}Category{% endtrans %}
+        </a>
+      </div>{#heading#}
+      <div id="collapseOne" class="accordion-body in collapse" style="height: auto;">
+        <div class="accordion-inner">
+          <ul>
+            {% for category in categories %}
+            <li {% if active == category.id %}class="active"{% endif %}>
+              <a href="#"><span>&raquo;</span> {{ category.name }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -24,6 +24,7 @@ class SiteExtension extends \Twig_Extension {
         return array(
           'truncate' => new \Twig_Filter_Method($this, 'truncate'),
           'nbsp2sp' => new \Twig_Filter_Method($this, 'nbsp2sp'),
+          'timeAgo' => new \Twig_Filter_Method($this, 'timeAgo'),
         );
     }
 
@@ -101,6 +102,26 @@ class SiteExtension extends \Twig_Extension {
 
     public function mlurl($name, $parameters = array()) {
         return $this->mlpath($name, $parameters, true);
+    }
+
+    public function timeAgo(\DateTime $datetime) {
+        $periods = array('second', 'minute', 'hour', 'day', 'week', 'month', 'year', 'decade');
+        $lengths = array('60', '60', '24', '7', '4.35', '12', '10');
+
+        $now = time();
+        $difference = $now - $datetime->getTimestamp();
+
+        for ($j = 0; $difference >= $lengths[$j] && $j < count($lengths) - 1; $j++) {
+            $difference /= $lengths[$j];
+        }
+        $difference = round($difference);
+        if ($difference != 1) {
+            $periods[$j] .= 's';
+        }
+
+        $list = array('difference'=>$difference, 'period'=>$periods[$j]);
+        return $list;
+//        return "$difference {$periods[$j]} ago";
     }
 
 }

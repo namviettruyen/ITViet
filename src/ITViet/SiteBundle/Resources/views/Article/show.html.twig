@@ -1,0 +1,22 @@
+{% extends 'ITVietSiteBundle::layout.html.twig' %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block navigator %}
+  {% include 'ITVietSiteBundle:Layout:navigator.html.twig' with {'active':'none'} %}
+{% endblock %}
+
+{% block maincontents %}
+<div class="clearfix">
+{% render 'ITVietSiteBundle:Layout:leftSideBar' with {'standalone': true, 'active': article.category.id} %}
+  <div class="main-wall">
+    Wall for people chat...
+  </div>
+  <div class="main-content">
+    <h1 class="title">{{ article.title }}</h1>
+    {{ article.content|raw }}
+    <br />
+    {{ article.postedAt|date('d-m-Y') }}
+  </div>
+</div>
+{% endblock %}

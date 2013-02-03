@@ -238,3 +238,17 @@ _vi_article_new:
     requirements:
         _scheme: http
 
+_article_show:
+    pattern: /{_locale}/article/{id}/{category}/{urlPart}
+    defaults: { _controller: ITVietSiteBundle:Article:show }
+    requirements:
+        _scheme: http
+        _locale: en
+
+_vi_article_show:
+    pattern: /bai-viet/{id}/{category}/{urlPart}
+    defaults: { _controller: ITVietSiteBundle:Article:show, _locale: vi }
+    requirements:
+        _scheme: http
+
+

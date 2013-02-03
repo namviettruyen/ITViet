@@ -2,7 +2,7 @@
 {% extends 'ITVietSiteBundle::layout.html.twig' %}
 
 {% block navigator %}
-  {% include 'ITVietSiteBundle::navigator.html.twig' with {'active':'profile'} %}
+  {% include 'ITVietSiteBundle:Layout:navigator.html.twig' with {'active':'profile'} %}
 {% endblock %}
 
 {% block title %}{% trans %}Post New Article{% endtrans %}{% endblock %}

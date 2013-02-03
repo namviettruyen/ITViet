@@ -5,10 +5,11 @@ use Doctrine\ORM\EntityRepository;
 class ArticleRepository extends EntityRepository
 {
     public function getArticles($member_id = null, $max = null, $offset = null) {
-
         $qb = $this->createQueryBuilder('a')
           ->where('a.isDeleted = :del')
-          ->setParameter('del', false);
+          ->setParameter('del', false)
+          ->andWhere('a.isActive = :act')
+          ->setParameter('act', true);
 
         if ($member_id)
             $qb->andWhere('a.member = :mem_id')->setParameter('mem_id', $member_id);
@@ -19,5 +20,23 @@ class ArticleRepository extends EntityRepository
 
         $qb->orderBy('a.postedAt', 'DESC');
         return $qb->getQuery()->getResult();
+    }
+
+    public function findOne($id) {
+        $qb = $this->createQueryBuilder('a')
+          ->where('a.id = ?1')
+          ->setParameter(1, $id)
+          ->andWhere('a.isDeleted = ?2')
+          ->setParameter(2, false)
+          ->andWhere('a.isActive = ?3')
+          ->setParameter(3, true);
+
+        try {
+            $article = $qb->getQuery()->getSingleResult();
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            $article = null;
+        }
+
+        return $article;
     }
 }

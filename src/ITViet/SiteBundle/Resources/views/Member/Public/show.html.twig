@@ -1,7 +1,7 @@
 {% extends 'ITVietSiteBundle::layout.html.twig' %}
 
 {% block navigator %}
-  {% include 'ITVietSiteBundle::navigator.html.twig' with {'active':'none'} %}
+  {% include 'ITVietSiteBundle:Layout:navigator.html.twig' with {'active':'none'} %}
 {% endblock %}
 
 {% block title %}{% trans %}Member{% endtrans %} {{ member.fullName }} - ITViet{% endblock %}

@@ -122,3 +122,55 @@ margin-left: 22.5%;
 width: 20%;
 float: right;
 }
+
+.main-content div .title {
+font-weight: bold;
+}
+.main-content .articles {
+border-bottom: 1px solid #EAEAEA;
+padding: 10px 0;
+overflow: hidden;
+}
+.main-content .articles .member {
+float: right;
+}
+
+.main-content .articles .member span {
+display: block;
+color: #999;
+}
+
+.nav-fix {
+margin-bottom: 0;
+}
+
+.accordion-heading .accordion-toggle {
+padding-left: 13px;
+}
+.accordion-heading a:hover {
+background-color: #eee;
+}
+.accordion-heading .accordion-toggle span {
+color: #999;
+}
+.accordion-inner {
+padding-left: 0;
+}
+.accordion-inner ul {
+list-style: none;
+}
+.accordion-inner ul li a span{
+color: #999;
+}
+h1.title {
+font-size: 25px;
+border-bottom: 1px solid #ddd;
+}
+
+.accordion-inner ul li.active a{
+color: #555;
+}
+.accordion-inner ul li.active a:hover {
+cursor: default;
+text-decoration: none;
+}

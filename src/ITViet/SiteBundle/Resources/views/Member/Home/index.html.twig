@@ -2,12 +2,13 @@
 {% extends 'ITVietSiteBundle::layout.html.twig' %}
 
 {% block navigator %}
-  {% include 'ITVietSiteBundle::navigator.html.twig' with {'active':'profile'} %}
+  {% include 'ITVietSiteBundle:Layout:navigator.html.twig' with {'active':'profile'} %}
 {% endblock %}
 
 {% block title %}{% trans %}Profile{% endtrans %}{% endblock %}
 
 {% block maincontents %}
+
 
   {% include 'ITVietSiteBundle:Member:publicInfo.html.twig' with {'member': member} %}
 
@@ -38,6 +39,7 @@
           <th>{% trans %}Posted At{% endtrans %}</th>
           <th>{% trans %}Category{% endtrans %}</th>
           <th>{% trans %}Active{% endtrans %}</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -48,6 +50,7 @@
           <td>{{ article.postedAt | date("d-m-Y") }}</td>
           <td>{{ article.category.name }}</td>
           <td>{% set active = article.isActive ? 'Yes' : 'No' %}{{ active|trans }}</td>
+          <td><input name='ckSelect[]' type='checkbox' value='{{ article.id }}'></td>
         </tr>
         {% endfor %}
       </tbody>
