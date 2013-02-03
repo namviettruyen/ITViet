@@ -10,13 +10,17 @@
 <div class="clearfix">
 {% render 'ITVietSiteBundle:Layout:leftSideBar' with {'standalone': true, 'active': article.category.id} %}
   <div class="main-wall">
-    Wall for people chat...
+    Wall for article information...
   </div>
   <div class="main-content">
     <h1 class="title">{{ article.title }}</h1>
     {{ article.content|raw }}
     <br />
-    {{ article.postedAt|date('d-m-Y') }}
+    {% trans %}Posted At{% endtrans %}: {{ article.postedAt|date('d-m-Y') }}
+    <br />
+    {% if article.modifiedAt is not null %}
+      {% trans %}Edited At{% endtrans %}: {{ article.modifiedAt|date('h:m A d-m-Y') }}
+    {% endif %}
   </div>
 </div>
 {% endblock %}

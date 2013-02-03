@@ -44,4 +44,41 @@ class ArticleController extends BaseController
           'form' => $form->createView(),
         );
     }
+
+
+     /**
+     * @Template()
+     */
+    public function editAction($id)
+    {
+        $em = $this->get('doctrine.orm.entity_manager');
+        $member = $this->get('security.context')->getToken()->getUser();
+        if (!$member) {
+            throw $this->createNotFoundException('You have to login first');
+        }
+        $t = $this->get('translator');
+        $article = $em->getRepository('ITVietSiteBundle:Article')->findOne($id, $member->getId());
+        $form = $this->createForm(new ArticleNewType(), $article);
+        $request = $this->getRequest();
+
+        if ($request->getMethod() == 'POST') {
+            $form->bindRequest($request);
+
+            if (strlen(strip_tags($form['content']->getData())) < 10)
+                $form->addError(new FormError($t->trans('Content must larger 10 character')));
+
+            if ($form->isValid()) {
+                $em->persist($article);
+                $em->flush();
+                $this->get('session')->setFlash('success', $t->trans('Edit article success'));
+                return $this->redirect($this->generateMlUrl('_member_home'));
+            }
+        }
+
+        return array(
+          'form' => $form->createView(),
+          'article' => $article,
+        );
+    }
+
 }

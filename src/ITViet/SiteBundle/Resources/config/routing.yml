@@ -251,4 +251,15 @@ _vi_article_show:
     requirements:
         _scheme: http
 
+_article_edit:
+    pattern: /{_locale}/member/article/{id}/sua
+    defaults: { _controller: ITVietSiteBundle:Member\Article:edit }
+    requirements:
+        _scheme: http
+        _locale: en
+_vi_article_edit:
+    pattern: /thanh-vien/bai-viet/{id}/sua
+    defaults: { _controller: ITVietSiteBundle:Member\Article:edit, _locale: vi }
+    requirements:
+        _scheme: http
 
