@@ -34,8 +34,7 @@
     <table class="table table-hover">
       <thead class="tb-confident">
         <tr>
-          <th>#</th>
-          <th>{% trans %}Title{% endtrans %}</th>
+          <th><i class="icon-pencil icon-white"></i> {% trans %}Title{% endtrans %}</th>
           <th>{% trans %}Posted At{% endtrans %}</th>
           <th>{% trans %}Category{% endtrans %}</th>
           <th>{% trans %}Active{% endtrans %}</th>
@@ -45,8 +44,12 @@
       <tbody>
         {% for article in articles %}
         <tr>
-          <td>1</td>
-          <td>{{ article.title }}</td>
+          <td>
+            <a class="title" href="{{ mlpath('_article_show',
+            {'id': article.id, 'category': article.category.urlPart, 'urlPart': article.urlPart }) }}">
+              <i class="icon-pencil"></i> {{ article.title }}
+            </a>
+          </td>
           <td>{{ article.postedAt | date("d-m-Y") }}</td>
           <td>{{ article.category.name }}</td>
           <td>{% set active = article.isActive ? 'Yes' : 'No' %}{{ active|trans }}</td>

@@ -4,13 +4,13 @@ use Doctrine\ORM\EntityRepository;
 
 class ArticleRepository extends EntityRepository
 {
-    public function getArticles($member_id = null, $max = null, $offset = null) {
-        $qb = $this->createQueryBuilder('a')
-          ->where('a.isDeleted = :del')
-          ->setParameter('del', false)
-          ->andWhere('a.isActive = :act')
-          ->setParameter('act', true);
+    public function getArticles($member_id = null, $max = null, $offset = null, $del = null, $act = null) {
+        $qb = $this->createQueryBuilder('a');
 
+        if ($del)
+            $qb->where('a.isDeleted = :del')->setParameter('del', false);
+        if ($act)
+            $qb->andWhere('a.isActive = :act')->setParameter('act', true);
         if ($member_id)
             $qb->andWhere('a.member = :mem_id')->setParameter('mem_id', $member_id);
         if ($max)
@@ -22,14 +22,17 @@ class ArticleRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function findOne($id) {
+    public function findOne($id, $member_id) {
         $qb = $this->createQueryBuilder('a')
           ->where('a.id = ?1')
           ->setParameter(1, $id)
           ->andWhere('a.isDeleted = ?2')
-          ->setParameter(2, false)
-          ->andWhere('a.isActive = ?3')
-          ->setParameter(3, true);
+          ->setParameter(2, false);
+
+        if (!$member_id)
+            $qb->andWhere('a.isActive = ?3')->setParameter(3, true);
+        else
+            $qb->andWhere('a.member = ?3')->setParameter(3, $member_id);
 
         try {
             $article = $qb->getQuery()->getSingleResult();

@@ -12,7 +12,14 @@ class ArticleController extends Controller
      */
     public function showAction($id) {
         $em = $this->get('doctrine.orm.entity_manager');
-        $article = $em->getRepository('ITVietSiteBundle:Article')->findOne($id);
+        $member = $this->get('security.context')->getToken()->getUser();
+
+        if ($member != 'anon.')
+          $member_id = $member->getId();
+        else
+          $member_id = null;
+
+        $article = $em->getRepository('ITVietSiteBundle:Article')->findOne($id, $member_id);
 
         if (!$article) {
            throw $this->createNotFoundException('Unable to find Article entity');
