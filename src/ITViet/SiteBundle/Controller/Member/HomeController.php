@@ -14,7 +14,7 @@ class HomeController extends BaseController
     {
         $em = $this->get('doctrine.orm.entity_manager');
         $member = $this->get('security.context')->getToken()->getUser();
-        $articles = $em->getRepository('ITVietSiteBundle:Article')->getArticles($member->getId());
+        $articles = $em->getRepository('ITVietSiteBundle:Article')->getArticlesByMember($member->getId());
         return array(
           'member' => $member,
           'articles' => $articles,

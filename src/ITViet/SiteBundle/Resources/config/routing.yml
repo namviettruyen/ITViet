@@ -263,3 +263,17 @@ _vi_article_edit:
     requirements:
         _scheme: http
 
+_article_manage:
+    pattern: /{_locale}/member/article/manage
+    defaults: { _controller: ITVietSiteBundle:Member\Article:manage }
+    requirements:
+        _scheme: http
+        _locale: en
+        _method: post
+_vi_article_manage:
+    pattern: /thanh-vien/bai-viet/quan-ly
+    defaults: { _controller: ITVietSiteBundle:Member\Article:manage, _locale: vi }
+    requirements:
+        _scheme: http
+        _method: post
+

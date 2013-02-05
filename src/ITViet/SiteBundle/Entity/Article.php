@@ -80,7 +80,6 @@ class Article
      */
     private $modifiedAt;
 
-
     /**
      * Get id
      *
@@ -324,5 +323,4 @@ class Article
     public function setIsDeleted($val) {
         $this->isDeleted = $val;
     }
-
 }

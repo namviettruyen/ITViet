@@ -81,7 +81,7 @@ class LoadMemberData extends AbstractFixture implements OrderedFixtureInterface,
         }
 
         // article
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 21; $i <= 30; $i++) {
             $article = new Article();
             $article->setMember($users[0]);
             $article->setCategory($categories[$i % 4]);

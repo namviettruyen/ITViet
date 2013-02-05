@@ -4,6 +4,12 @@ use Doctrine\ORM\EntityRepository;
 
 class ArticleRepository extends EntityRepository
 {
+    //List article are posted by Member not include: isDeleted = true
+    public function getArticlesByMember($member_id) {
+        return $this->getArticles($member_id, null, null, true, null);
+    }
+
+    //List article load not include: isActive = false, isDeleted = true
     public function getArticles($member_id = null, $max = null, $offset = null, $del = null, $act = null) {
         $qb = $this->createQueryBuilder('a');
 
