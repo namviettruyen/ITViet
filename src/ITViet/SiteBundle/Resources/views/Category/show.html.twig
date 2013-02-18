@@ -1,0 +1,16 @@
+{% extends 'ITVietSiteBundle::layout.html.twig' %}
+
+{% block title %}{% trans %}Category{% endtrans %}: {{ category.name }}{% endblock %}
+
+{% block navigator %}
+  {% include 'ITVietSiteBundle:Layout:navigator.html.twig' with {'active':'none'} %}
+{% endblock %}
+
+{% block maincontents %}
+<div class="clearfix">
+  {% render 'ITVietSiteBundle:Layout:leftSideBar' with {'standalone': true, 'active': category.id} %}
+  <div class="main-wall">
+    Wall for people chat...
+  </div>
+  {% include 'ITVietSiteBundle:Article:list.html.twig' with {'articles':articles} %}
+</div>{% endblock %}

@@ -1,7 +1,7 @@
 <div class="main-sidebar">
   <ul class="nav nav-tabs nav-stacked nav-fix">
     <li {% if active == 'latest' %}class="active"{% endif %}>
-      <a href="#">{% trans %}Latest articles{% endtrans %}</a>
+      <a href="{{ mlpath('_homepage') }}"><span>-</span> {% trans %}Latest articles{% endtrans %}</a>
     </li>
   </ul>
   <div class="accordion" id="accordion2">
@@ -16,7 +16,7 @@
           <ul>
             {% for category in categories %}
             <li {% if active == category.id %}class="active"{% endif %}>
-              <a href="#"><span>&raquo;</span> {{ category.name }}</a>
+              <a href="{{ mlpath('_category_show', {'urlPart': category.urlPart}) }}"><span>&raquo;</span> {{ category.name }}</a>
             </li>
             {% endfor %}
           </ul>

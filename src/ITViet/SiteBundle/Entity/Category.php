@@ -10,7 +10,7 @@ use ITViet\SiteBundle\Model\CharConverter;
  * ITViet\SiteBundle\Entity\Category
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ITViet\SiteBundle\Repository\CategoryRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class Category

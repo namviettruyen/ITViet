@@ -13,21 +13,6 @@
   <div class="main-wall">
     Wall for people chat...
   </div>
-  <div class="main-content">
-    {% for article in articles %}
-      {% set timeAgo = article.postedAt|timeAgo %}
-      <div class="articles clearfix">
-        <a class="title" href="{{ mlpath('_article_show',
-        {'id': article.id, 'category': article.category.urlPart, 'urlPart': article.urlPart }) }}">
-          {{ article.title }}
-        </a>
-        <div>
-        </div>
-        <div class="member">
-          <small><a href="{{ mlpath('_member_public_show', {'id': article.member.id, 'name': article.member.fullNameSlug }) }}">{{ article.member.fullName }}</a> <span>{{ timeAgo.difference }} {{ timeAgo.period|trans }} {% trans %}ago{% endtrans %}</span></small>
-        </div>
-      </div>
-    {% endfor %}
-  </div>
+  {% include 'ITVietSiteBundle:Article:list.html.twig' with {'articles':articles} %}
 </div>
 {% endblock %}

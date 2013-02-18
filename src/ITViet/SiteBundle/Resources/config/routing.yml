@@ -277,3 +277,14 @@ _vi_article_manage:
         _scheme: http
         _method: post
 
+_category_show:
+    pattern: /{_locale}/category/{urlPart}
+    defaults: { _controller: ITVietSiteBundle:Category:show }
+    requirements:
+        _scheme: http
+        _locale: en
+_vi_category_show:
+    pattern: /danh-muc/{urlPart}
+    defaults: { _controller: ITVietSiteBundle:Category:show, _locale: vi }
+    requirements:
+        _scheme: http

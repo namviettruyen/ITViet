@@ -13,7 +13,7 @@ class TopController extends Controller
     public function indexAction()
     {
         $em = $this->get('doctrine.orm.entity_manager');
-        $articles = $em->getRepository('ITVietSiteBundle:Article')->getArticles(null,null,null,null, true);
+        $articles = $em->getRepository('ITVietSiteBundle:Article')->getArticlesActive();
         return array('articles' => $articles);
     }
 }
