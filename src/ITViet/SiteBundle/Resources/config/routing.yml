@@ -1,12 +1,12 @@
 _homepage:
-    pattern:  /{_locale}
-    defaults: { _controller: ITVietSiteBundle:Top:index }
+    pattern:  /{_locale}/{page}
+    defaults: { _controller: ITVietSiteBundle:Top:index, page: 1 }
     requirements:
         _scheme: http
         _locale: en
 _vi_homepage:
-    pattern:  /
-    defaults: { _controller: ITVietSiteBundle:Top:index, _locale: vi }
+    pattern:  /{page}
+    defaults: { _controller: ITVietSiteBundle:Top:index, _locale: vi, page: 1 }
     requirements:
         _scheme: http
 
@@ -278,13 +278,13 @@ _vi_article_manage:
         _method: post
 
 _category_show:
-    pattern: /{_locale}/category/{urlPart}
-    defaults: { _controller: ITVietSiteBundle:Category:show }
+    pattern: /{_locale}/category/{urlPart}/{page}
+    defaults: { _controller: ITVietSiteBundle:Category:show, page: 1  }
     requirements:
         _scheme: http
         _locale: en
 _vi_category_show:
-    pattern: /danh-muc/{urlPart}
-    defaults: { _controller: ITVietSiteBundle:Category:show, _locale: vi }
+    pattern: /danh-muc/{urlPart}/{page}
+    defaults: { _controller: ITVietSiteBundle:Category:show, _locale: vi, page: 1 }
     requirements:
         _scheme: http

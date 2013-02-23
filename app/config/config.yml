@@ -61,3 +61,4 @@ jms_security_extra:
 
 parameters:
     mail: 'itviet@itviet.com'
+    max_articles_on_toppage: 2

@@ -12,5 +12,8 @@
   <div class="main-wall">
     Wall for people chat...
   </div>
-  {% include 'ITVietSiteBundle:Article:list.html.twig' with {'articles':articles} %}
+  <div class="main-content">
+  {% include 'ITVietSiteBundle:Article:list.html.twig' %}
+  {% include 'ITVietSiteBundle:Common:paginator.html.twig' %}
+  </div>
 </div>{% endblock %}

@@ -1,0 +1,43 @@
+<div class="pagination pagination-right">
+  <ul>
+  {% if paginator.isFirst %}
+    <li class="disabled">
+      <a>&laquo;</a>
+    </li>
+  {% else %}
+    <li>
+      <a href="{{ mlpath(paginator.route, paginator.params|merge(paginator.page-1>1 ? {'page': paginator.page-1}:{})) }}">&laquo;</a>
+    </li>
+  {% endif %}
+
+{% for bck in paginator.pageBlocks %}
+  {% for i in range(bck[0], bck[1]) %}
+    {% if paginator.page == i %}
+    <li class="active">
+      <a href="#">{{ i }}</a>
+    </li>
+    {% else %}
+    <li>
+      <a href="{{ mlpath(paginator.route, paginator.params|merge(i>1 ? {'page': i}:{})) }}">{{ i }}</a>
+    </li>
+    {% endif %}
+  {% endfor %}
+  
+  {% if not loop.last %}
+    <li>
+      <a>...</a>
+    </li>
+  {% endif %}
+{% endfor %}
+
+  {% if paginator.isLast %}
+    <li class="disabled">
+      <a>&raquo;</a>
+    </li>
+  {% else %}
+    <li>
+      <a href="{{ mlpath(paginator.route, paginator.params|merge({'page': paginator.page+1})) }}">&raquo;</a>
+    </li>
+  {% endif %}
+  </ul>
+</div>
