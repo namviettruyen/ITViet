@@ -1,12 +1,12 @@
 _homepage:
-    pattern:  /{_locale}/{page}
-    defaults: { _controller: ITVietSiteBundle:Top:index, page: 1 }
+    pattern:  /{_locale}
+    defaults: { _controller: ITVietSiteBundle:Top:index }
     requirements:
         _scheme: http
         _locale: en
 _vi_homepage:
-    pattern:  /{page}
-    defaults: { _controller: ITVietSiteBundle:Top:index, _locale: vi, page: 1 }
+    pattern:  /
+    defaults: { _controller: ITVietSiteBundle:Top:index, _locale: vi }
     requirements:
         _scheme: http
 
@@ -286,5 +286,17 @@ _category_show:
 _vi_category_show:
     pattern: /danh-muc/{urlPart}/{page}
     defaults: { _controller: ITVietSiteBundle:Category:show, _locale: vi, page: 1 }
+    requirements:
+        _scheme: http
+
+_articles_newest:
+    pattern: /{_locale}/newest/{page}
+    defaults: { _controller: ITVietSiteBundle:Top:newest, page: 1 }
+    requirements:
+        _scheme: http
+        _locale: en
+_vi_articles_newest:
+    pattern: /moi-nhat/{page}
+    defaults: { _controller: ITVietSiteBundle:Top:newest, page: 1, _locale: vi }
     requirements:
         _scheme: http

@@ -174,3 +174,7 @@ color: #555;
 cursor: default;
 text-decoration: none;
 }
+
+.right {
+float: right;
+}

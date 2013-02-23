@@ -1,6 +1,6 @@
 {% extends 'ITVietSiteBundle::layout.html.twig' %}
 
-{% block title %}{% trans %}Home{% endtrans %}{% endblock %}
+{% block title %}{% trans %}Newest{% endtrans %}{% endblock %}
 
 {% block navigator %}
   {% include 'ITVietSiteBundle:Layout:navigator.html.twig' with {'active':'home'} %}
@@ -15,7 +15,7 @@
   </div>
   <div class="main-content">
   {% include 'ITVietSiteBundle:Article:list.html.twig' %}
-    <a class="btn btn-info right" href="{{ mlpath('_articles_newest', {'page': 2}) }}">View more ...</a>
+  {% include 'ITVietSiteBundle:Common:paginator.html.twig' %}
   </div>
 </div>
 {% endblock %}
