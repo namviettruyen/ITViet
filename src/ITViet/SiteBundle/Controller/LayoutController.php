@@ -16,5 +16,16 @@ class LayoutController extends Controller
         $res->setSharedMaxAge(300);
         $res->setPublic();
         return $res;
-      }
+    }
+
+    public function wallAction() {
+        $member = $this->get('security.context')->getToken()->getUser();
+        $isMember = $this->get('security.context')->isGranted('ROLE_MEMBER') ? true : false ;
+        $res = $this->render('ITVietSiteBundle:Layout:wall.html.twig', array(
+          'isMember' => $isMember,
+        ));
+        $res->setSharedMaxAge(300);
+        $res->setPublic();
+        return $res;
+    }
 }

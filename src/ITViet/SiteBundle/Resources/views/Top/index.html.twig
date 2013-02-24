@@ -11,7 +11,8 @@
 <div class="clearfix">
   {% render 'ITVietSiteBundle:Layout:leftSideBar' with {'standalone': true, 'active': 'latest'} %}
   <div class="main-wall">
-    Wall for people chat...
+    <h2>{% trans %}Wall{% endtrans %}</h2>
+    {% render 'ITVietSiteBundle:Layout:wall' with {'standalone': true} %}
   </div>
   <div class="main-content">
   {% include 'ITVietSiteBundle:Article:list.html.twig' %}

@@ -1,0 +1,8 @@
+{% if isMember %}
+{% else %}
+<p class="muted">
+  <small>
+    {% trans with {'%href%': mlpath('_member_to_login')} %}You have to <a href="%href%">login</a> to post in this wall{% endtrans %}
+  </small>
+</p>
+{% endif %}
