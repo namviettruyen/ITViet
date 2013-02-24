@@ -11,8 +11,8 @@ class ArticleRepository extends EntityRepository
     }
 
     //show for member only
-    public function getArticlesByMember($member_id) {
-        return $this->getArticles(null, $member_id, null, null, true, null);
+    public function getArticlesByMember($member_id, $max, $offset) {
+        return $this->getArticles(null, $member_id, $max, $offset, true, null);
     }
 
     //show public
@@ -62,12 +62,21 @@ class ArticleRepository extends EntityRepository
         return $article;
     }
 
-    public function getCount($category_id = null) {
+    public function getCountByCategory($category_id) {
+        return $this->getCount($category_id);
+    }
+
+    public function getCountByMember($member_id) {
+        return $this->getCount(null, $member_id);
+    }
+
+    public function getCount($category_id = null, $member_id = null) {
         $q = $this->_em->createQuery("
             SELECT count(a.id)
             FROM ITVietSiteBundle:Article a
             WHERE a.isActive = ?1
             ".($category_id?" AND a.category = $category_id ":"")."
+            ".($member_id?" AND a.member = $member_id ":"")."
           ")->setParameter(1, true);
 
         return $q->getSingleScalarResult();

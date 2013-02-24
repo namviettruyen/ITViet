@@ -1,0 +1,42 @@
+<form class="form-horizontal" name="frmForm" id="frmForm" action="{{ mlpath('_article_manage')}}" method="post">
+  <fieldset>
+    <legend>{% trans %}My Articles{% endtrans %}</legend>
+    <table class="table table-hover">
+      <thead class="tb-confident">
+        <tr>
+          <th><i class="icon-pencil icon-white"></i> {% trans %}Edit{% endtrans %}</th>
+          <th>{% trans %}Title{% endtrans %}</th>
+          <th>{% trans %}Posted At{% endtrans %}</th>
+          <th>{% trans %}Category{% endtrans %}</th>
+          <th>{% trans %}Active{% endtrans %}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for article in articles %}
+        <tr>
+          <td><a href="{{ mlpath('_article_edit', {'id': article.id}) }}">
+            <i class="icon-pencil"></i> {% trans %}Edit{% endtrans %}
+            </a></td>
+          <td>
+            <a class="title" href="{{ mlpath('_article_show',
+            {'id': article.id, 'category': article.category.urlPart, 'urlPart': article.urlPart }) }}">
+              {{ article.title }}
+            </a>
+          </td>
+          <td>{{ article.postedAt | date("d-m-Y") }}</td>
+          <td>{{ article.category.name }}</td>
+          <td>{% set active = article.isActive ? 'Yes' : 'No' %}{{ active|trans }}</td>
+          <td><input name='ckSelect[]' type='checkbox' value='{{ article.id }}'></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <img id="loading_animation" src="{{ asset('images/icon/ajax-loader.gif') }}" alt="processing..." />
+    {% include 'ITVietSiteBundle:Common:ajaxPaginator.html.twig' %}
+    <a class="btn btn-primary" href="{{ mlpath('_article_new') }}">{% trans %}Post New Article{% endtrans %}</a>
+    <input name="active" class="btn" type="submit" value="{% trans %}Active{% endtrans %}" />
+    <input name="unactive" class="btn" type="submit" value="{% trans %}Unactive{% endtrans %}" />
+    <input name="delete" class="btn" type="submit" value="{% trans %}Delete Article{% endtrans %}" />
+  </fieldset>
+</form>

@@ -8,6 +8,7 @@ use ITViet\SiteBundle\Entity\Article;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormError;
+use ITViet\SiteBundle\Model\Paginator;
 
 class ArticleController extends BaseController
 {
@@ -128,4 +129,25 @@ class ArticleController extends BaseController
         return $this->redirect($this->generateMLUrl('_member_home'));
     }
 
+     /**
+     * @Template()
+     */
+    public function listAction() {
+        $em = $this->get('doctrine.orm.entity_manager');
+        $request = $this->getRequest();
+        $member = $this->get('security.context')->getToken()->getUser();
+        if (!$member)
+            throw $this->createNotFoundException('Unable to find Member entity');
+
+        $articleRepos = $em->getRepository('ITVietSiteBundle:Article');
+        $count = $articleRepos->getCountByMember($member->getId());
+        $page = $request->get('page');
+        $paginator = new Paginator(null, array(), $count, 5, 5, $page);
+        $articles = $articleRepos->getArticlesByMember($member->getId(), $paginator->pageSize, $paginator->offset);
+        return array(
+          'member' => $member,
+          'articles' => $articles,
+          'paginator' => $paginator,
+        );
+    }
 }

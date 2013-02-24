@@ -19,7 +19,7 @@ class CategoryController extends Controller
         $articleRepos = $em->getRepository('ITVietSiteBundle:Article');
         $articles_per_page = $this->container->getParameter('max_articles_on_toppage');
         $display = 5;
-        $count = $articleRepos->getCount($category->getId());
+        $count = $articleRepos->getCountByCategory($category->getId());
         $paginator = new Paginator('_category_show', array('urlPart' => $category->getUrlPart()), $count, $display, $articles_per_page, $page);
         $articles = $articleRepos->getArticlesByCategory($category->getId(), $paginator->pageSize, $paginator->offset);
         return array(

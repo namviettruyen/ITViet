@@ -9,6 +9,34 @@
 
 {% block maincontents %}
 
+<script language="JavaScript" type="text/javascript">
+  function testSearch(extraParams) {
+    var href="{{ mlpath('_member_article_list') }}";
+    if (extraParams) {
+      href += '?';
+      for(var name in extraParams)
+        href += name + '=' + extraParams[name] + '&';
+      href = href.substr(0, href.length - 1);
+    }
+    $.ajax({
+      type: "POST",
+      url: href,
+      data: $('#frmForm').serialize(),
+      success: function(html) {
+        $('#loading_animation').hide();
+        $('#search_result').html(html);
+      }
+    });
+    $('#loading_animation').show();
+  }
+  function jumpToPage(params) {
+    testSearch(params);
+    return false;
+  }
+  $(function(){
+    testSearch();
+  });
+</script>
 
   {% include 'ITVietSiteBundle:Member:publicInfo.html.twig' with {'member': member} %}
 
@@ -27,48 +55,7 @@
 
 <div id="myTabContent" class="tab-content">
   <div class="tab-pane fade in active" id="home">
-
-<form class="form-horizontal" name="frmForm" id="frmForm" action="{{ mlpath('_article_manage')}}" method="post">
-  <fieldset>
-    <legend>{% trans %}My Articles{% endtrans %}</legend>
-    <table class="table table-hover">
-      <thead class="tb-confident">
-        <tr>
-          <th><i class="icon-pencil icon-white"></i> {% trans %}Edit{% endtrans %}</th>
-          <th>{% trans %}Title{% endtrans %}</th>
-          <th>{% trans %}Posted At{% endtrans %}</th>
-          <th>{% trans %}Category{% endtrans %}</th>
-          <th>{% trans %}Active{% endtrans %}</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for article in articles %}
-        <tr>
-          <td><a href="{{ mlpath('_article_edit', {'id': article.id}) }}">
-            <i class="icon-pencil"></i> {% trans %}Edit{% endtrans %}
-            </a></td>
-          <td>
-            <a class="title" href="{{ mlpath('_article_show',
-            {'id': article.id, 'category': article.category.urlPart, 'urlPart': article.urlPart }) }}">
-              {{ article.title }}
-            </a>
-          </td>
-          <td>{{ article.postedAt | date("d-m-Y") }}</td>
-          <td>{{ article.category.name }}</td>
-          <td>{% set active = article.isActive ? 'Yes' : 'No' %}{{ active|trans }}</td>
-          <td><input name='ckSelect[]' type='checkbox' value='{{ article.id }}'></td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    <a class="btn btn-primary" href="{{ mlpath('_article_new') }}">{% trans %}Post New Article{% endtrans %}</a>
-    <input name="active" class="btn" type="submit" value="{% trans %}Active{% endtrans %}" />
-    <input name="unactive" class="btn" type="submit" value="{% trans %}Unactive{% endtrans %}" />
-    <input name="delete" class="btn" type="submit" value="{% trans %}Delete Article{% endtrans %}" />
-  </fieldset>
-</form>
-
+    <div id="search_result"></div>
   </div>
   <div class="tab-pane fade" id="profile">
     {% include 'ITVietSiteBundle:Member\\Config:editProfile.html.twig' %}

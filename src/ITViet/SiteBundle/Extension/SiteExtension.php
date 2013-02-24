@@ -17,6 +17,7 @@ class SiteExtension extends \Twig_Extension {
           'getPathsForLocales' => new \Twig_Function_Method($this, 'getPathsForLocales'),
           'mlpath' => new \Twig_Function_Method($this, 'mlpath'),
           'mlurl' => new \Twig_Function_Method($this, 'mlurl'),
+          'toJsObj' => new \Twig_Function_Method($this, 'toJsObj'),
         );
     }
 
@@ -122,6 +123,13 @@ class SiteExtension extends \Twig_Extension {
         $list = array('difference'=>$difference, 'period'=>$periods[$j]);
         return $list;
 //        return "$difference {$periods[$j]} ago";
+    }
+
+    public function toJsObj($arr) {
+        $params = array();
+        foreach($arr as $k => $v)
+            $params[] = "'" . $k . "':'" . $v . "'";
+        return '{' . implode(',', $params) . '}';
     }
 
 }

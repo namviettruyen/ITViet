@@ -300,3 +300,10 @@ _vi_articles_newest:
     defaults: { _controller: ITVietSiteBundle:Top:newest, page: 1, _locale: vi }
     requirements:
         _scheme: http
+
+_member_article_list:
+    pattern: /{_locale}/member/article/list
+    defaults: { _controller: ITVietSiteBundle:Member\Article:list }
+    requirements:
+        _scheme: http
+        _locale: en|vi

@@ -178,3 +178,9 @@ text-decoration: none;
 .right {
 float: right;
 }
+
+#loading_animation{
+display: none;
+position: absolute;
+right: 50%;
+}
