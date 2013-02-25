@@ -8,6 +8,7 @@
     <div>
     </div>
     <div class="member">
+      <a href="{{ mlpath('_member_public_show', {'id': article.member.id, 'name': article.member.fullNameSlug }) }}"><img class="img-small" src="{{ article.member.getGravatar(50) }}" alt="{{ article.member.fullName }}" /></a>
       <small><a href="{{ mlpath('_member_public_show', {'id': article.member.id, 'name': article.member.fullNameSlug }) }}">{{ article.member.fullName }}</a> <span>{{ timeAgo.difference }} {{ timeAgo.period|trans }} {% trans %}ago{% endtrans %}</span></small>
     </div>
   </div>
