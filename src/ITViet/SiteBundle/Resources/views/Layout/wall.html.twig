@@ -1,4 +1,7 @@
 {% if isMember %}
+{% set member = app.security.getToken().getUser() %}
+<img class="img-small" src="{{ member.getGravatar(30) }}" alt="Ava" />
+<textarea class="post-wall" name=""></textarea>
 {% else %}
 <p class="muted">
   <small>
