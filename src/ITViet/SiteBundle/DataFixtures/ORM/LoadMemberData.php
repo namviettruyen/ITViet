@@ -11,6 +11,7 @@ use ITViet\SiteBundle\Entity\Member;
 use ITViet\SiteBundle\Entity\MemberLoginInfo;
 use ITViet\SiteBundle\Entity\Category;
 use ITViet\SiteBundle\Entity\Article;
+use ITViet\SiteBundle\Entity\Comment;
 
 class LoadMemberData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
@@ -71,23 +72,37 @@ class LoadMemberData extends AbstractFixture implements OrderedFixtureInterface,
             $categories[$n] = $category;
         }
 
+        // article
+        // for all members
+        $articles = array();
         for($i = 1; $i <= count($users); $i++) {
             $article = new Article();
             $article->setMember($users[$i - 1]);
             $article->setCategory($categories[$i % 4]);
             $article->setTitle('Bài viết Ấn tượng nhất'.$i);
-            $article->setContent('Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... ');
+            $article->setContent('<p>Nội dung bài viết, xin chào aos dsd sds dada  Nội dung bài viết Nội dung bài viết Nội dung bài viết Nội dung bài viết Nội dung bài viết Nội dung bài viết Nội dung bài viết Nội dung bài viết Nội</p> <p>dung bài viết Nội dung bài viết Nội dung bài viết Nội dung bài viết Nội dung bài viết Nội dung bài viết Nội dung bài viết Nội dung bài viết</p>');
             $em->persist($article);
+            $articles[$i-1] = $article;
         }
 
-        // article
+        // for only members id = 1, to test pagination
         for ($i = 21; $i <= 30; $i++) {
             $article = new Article();
             $article->setMember($users[0]);
             $article->setCategory($categories[$i % 4]);
             $article->setTitle('Bài viết Ấn tượng nhất'.$i);
-            $article->setContent('Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... Nội dung bài viết ... ');
+            $article->setContent('<p>Nội dung bài viết, xin chào aos dsd sds dada  Nội dung bài viết Nội dung bài viết Nội dung bài viết Nội dung bài viết Nội dung bài viết Nội dung bài viết Nội dung bài viết Nội dung bài viết Nội</p> <p>dung bài viết Nội dung bài viết Nội dung bài viết Nội dung bài viết Nội dung bài viết Nội dung bài viết Nội dung bài viết Nội dung bài viết</p>');
             $em->persist($article);
+            $articles[$i-1] = $article;
+        }
+
+        //comment
+        for($i = 1; $i <= count($users); $i++) {
+            $comment = new Comment();
+            $comment->setContent('Bài viết rất tốt, cố gắng phát huy!Bài viết rất tốt, cố gắng phát huy!Bài viết rất tốt, cố gắng phát huy!Bài viết rất tốt, cố gắng phát huy!');
+            $comment->setMember($users[$i-1]);
+            $comment->setArticle($articles[$i]);//he comments for himself
+            $em->persist($comment);
         }
 
         $em->flush();

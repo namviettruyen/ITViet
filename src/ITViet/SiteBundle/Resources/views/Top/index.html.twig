@@ -7,7 +7,6 @@
 {% endblock %}
 
 {% block maincontents %}
-<a class="logo" href="#"><span></span></a>
 <div class="clearfix">
   {% render 'ITVietSiteBundle:Layout:leftSideBar' with {'standalone': true, 'active': 'latest'} %}
   <div class="main-wall">
@@ -16,7 +15,7 @@
   </div>
   <div class="main-content">
   {% include 'ITVietSiteBundle:Article:list.html.twig' %}
-    <a class="btn btn-info right" href="{{ mlpath('_articles_newest', {'page': 2}) }}">View more ...</a>
+    <a class="btn btn-info right" href="{{ mlpath('_articles_newest', {'page': 2}) }}">{% trans %}View more{% endtrans %} ...</a>
   </div>
 </div>
 {% endblock %}

@@ -81,6 +81,11 @@ class Article
     private $modifiedAt;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $countComment = 0;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -322,5 +327,18 @@ class Article
     }
     public function setIsDeleted($val) {
         $this->isDeleted = $val;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="article")
+     */
+    private $comments;
+
+    public function increaseCount() {
+        $this->countComment++;
+    }
+
+    public function getCountComment() {
+        return $this->countComment;
     }
 }

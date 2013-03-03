@@ -20,10 +20,14 @@ class ArticleController extends Controller
           $member_id = null;
 
         $article = $em->getRepository('ITVietSiteBundle:Article')->findOne($id, $member_id);
+        $comments = $em->getRepository('ITVietSiteBundle:Comment')->getCommentByArticle($article->getId());
 
         if (!$article) {
            throw $this->createNotFoundException('Unable to find Article entity');
         }
-        return array('article' => $article);
+        return array(
+          'article' => $article,
+          'comments' => $comments,
+        );
     }
 }

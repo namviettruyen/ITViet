@@ -22,7 +22,9 @@ margin-right: 15px;
 .alert p {
 margin-bottom: 0;
 }
-
+.alert {
+box-shadow: 2px 2px 3px #666;
+}
 .tab-content {
 border-bottom: 1px solid #DDDDDD;
 }
@@ -135,7 +137,7 @@ overflow: hidden;
 .main-content .articles .member {
 float: right;
 margin-right: 10px;
-width: 170px;
+width: 150px;
 }
 
 .main-content .articles .member span {
@@ -219,6 +221,9 @@ margin-right: 5px;
 border-radius: 3px 3px 3px 3px;
 box-shadow: 0 0 3px #666;
 }
+.member .img-small {
+margin-top: 5px;
+}
 .post-wall {
 overflow: hidden;
 resize: none;
@@ -227,3 +232,10 @@ width: 185px;
 .text-right {
 text-align: right;
 }
+.post-title {
+font-size: 17px;
+}
+.post-content {
+margin-top: 10px;
+}
+

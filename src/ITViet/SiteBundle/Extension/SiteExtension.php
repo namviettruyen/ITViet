@@ -92,8 +92,8 @@ class SiteExtension extends \Twig_Extension {
         }, $str);
     }
     public function truncate($str, $len, $abb) {
-        if (mb_strlen($str, 'UTF-8') > $len)
-            return mb_substr($str, 0, $len, 'UTF-8').$abb;
+        if (mb_strlen($str, 'utf-8') >= $len)
+            return mb_substr($str, 0, $len, 'utf-8').$abb;
         else
             return $str;
     }

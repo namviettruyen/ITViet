@@ -225,4 +225,9 @@ class Member extends AbstractUser
     public function getFullNameSlug() {
         return Utils::slugify($this->fullNameInAscii);
     }
+
+    /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="member")
+     */
+    protected $comments;
 }
