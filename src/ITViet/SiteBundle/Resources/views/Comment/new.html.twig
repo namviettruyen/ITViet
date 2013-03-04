@@ -1,0 +1,17 @@
+{% if isMember %}
+{% set member = app.security.getToken().getUser() %}
+<img class="img-small" src="{{ member.getGravatar(32) }}" alt="Ava" />
+<div class="comment-body">
+  <form>
+    <textarea class="post-wall cmt" name=""></textarea>
+    <input type="submit" name="dang" value="Dang" />
+  </form>
+</div>
+{% else %}
+<p class="muted">
+  <small>
+    {% trans with {'%href%': mlpath('_member_to_login')} %}You have to <a href="%href%">login</a> to post comment{% endtrans %}
+  </small>
+</p>
+{% endif %}
+

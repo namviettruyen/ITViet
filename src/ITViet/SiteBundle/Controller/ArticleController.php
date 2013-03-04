@@ -16,9 +16,10 @@ class ArticleController extends Controller
         $isMember = $this->get('security.context')->isGranted('ROLE_MEMBER') ? true : false ;
 
         $temArticle = $em->getRepository('ITVietSiteBundle:Article')->find($id);
+        $isOwner = $member != 'anon.' ? $member->getId() == $temArticle->getMember()->getId(): false;
         //if isAdmin show
         //if isOwner check isDeleted and show
-        if ($member->getId() == $temArticle->getMember()->getId()) {
+        if ($isOwner) {
             $article = $em->getRepository('ITVietSiteBundle:Article')->findOneAsOwner($id);
         } else {
             $article = $em->getRepository('ITVietSiteBundle:Article')->findOneAsGuest($id);
