@@ -41,17 +41,22 @@ class ArticleRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function findOne($id, $member_id) {
+    public function findOneAsOwner($id) {
+        return $this->findOne($id, true);
+    }
+    public function findOneAsGuest($id) {
+        return $this->findOne($id, true, true);
+    }
+    public function findOne($id, $del = null, $act = null) {
         $qb = $this->createQueryBuilder('a')
           ->where('a.id = ?1')
-          ->setParameter(1, $id)
-          ->andWhere('a.isDeleted = ?2')
+          ->setParameter(1, $id);
+        if ($del)
+          $qb->andWhere('a.isDeleted = ?2')
           ->setParameter(2, false);
-
-        if (!$member_id)
-            $qb->andWhere('a.isActive = ?3')->setParameter(3, true);
-        else
-            $qb->andWhere('a.member = ?3')->setParameter(3, $member_id);
+        if ($act)
+          $qb->andWhere('a.isActive = ?3')
+          ->setParameter(3, true);
 
         try {
             $article = $qb->getQuery()->getSingleResult();

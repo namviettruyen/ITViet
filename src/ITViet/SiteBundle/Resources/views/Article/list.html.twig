@@ -6,7 +6,7 @@
       {{ article.title }}
     </a>
     <div>
-      {{ article.content|striptags|nbsp2sp|truncate(100, '..')|raw }}
+      {{ article.content|striptags|nbsp2sp|truncate(100, '...')|raw }}
     </div>
     <div class="member">
       <a href="{{ mlpath('_member_public_show', {'id': article.member.id, 'name': article.member.fullNameSlug }) }}"><img class="img-small" src="{{ article.member.getGravatar(32) }}" alt="{{ article.member.fullName }}" /></a>

@@ -119,7 +119,6 @@ float: left;
 .main-content {
 width: 50%;
 margin-left: 22.5%;
-border-right: 1px solid #EAEAEA;
 }
 .main-wall {
 width: 25%;
@@ -238,4 +237,22 @@ font-size: 17px;
 .post-content {
 margin-top: 10px;
 }
-
+.post-cmt {
+margin: 0;
+list-style: none outside none;
+overflow: hidden;
+}
+.separator {
+margin: 20px 0;
+}
+.post-cmt .avatar {
+float: left;
+margin-top: 3px;
+}
+.post-cmt .comment-body a {
+margin-right: 5px;
+}
+.post-cmt .comment-body {
+float: left;
+width: 420px;
+}

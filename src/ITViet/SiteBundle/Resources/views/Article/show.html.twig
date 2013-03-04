@@ -23,11 +23,33 @@
     <div class="post-content">
     {{ article.content|raw }}
     </div>
+    <hr />
     <ul class="post-cmt">
       {% for comment in comments %}
-      <li>{{ comment.content }}</li>
+      <li>
+        <div class="avatar"><a href="{{ mlpath('_member_public_show', {'id': article.member.id, 'name': article.member.fullNameSlug }) }}"><img class="img-small" src="{{ article.member.getGravatar(32) }}" alt="{{ article.member.fullName }}" /></a></div>
+        <div class="comment-body">
+          <a href="{{ mlpath('_member_public_show', {'id': article.member.id, 'name': article.member.fullNameSlug }) }}">{{ article.member.fullName }}</a>
+          {{ comment.content }}
+          {% set timeAgo = comment.postedAt|timeAgo %}
+          <p class="muted"><small>{{ timeAgo.difference }} {{ timeAgo.period|trans }} {% trans %}ago{% endtrans %}</small></p>
+        </div>
+      </li>
       {% endfor %}
     </ul>
+
+{% if isMember %}
+{% set member = app.security.getToken().getUser() %}
+<img class="img-small" src="{{ member.getGravatar(32) }}" alt="Ava" />
+<textarea class="post-wall" name=""></textarea>
+{% else %}
+<p class="muted">
+  <small>
+    {% trans with {'%href%': mlpath('_member_to_login')} %}You have to <a href="%href%">login</a> to post comment{% endtrans %}
+  </small>
+</p>
+{% endif %}
+
   </div>
 </div>
 {% endblock %}

@@ -13,21 +13,28 @@ class ArticleController extends Controller
     public function showAction($id) {
         $em = $this->get('doctrine.orm.entity_manager');
         $member = $this->get('security.context')->getToken()->getUser();
+        $isMember = $this->get('security.context')->isGranted('ROLE_MEMBER') ? true : false ;
 
-        if ($member != 'anon.')
-          $member_id = $member->getId();
-        else
-          $member_id = null;
-
-        $article = $em->getRepository('ITVietSiteBundle:Article')->findOne($id, $member_id);
-        $comments = $em->getRepository('ITVietSiteBundle:Comment')->getCommentByArticle($article->getId());
+        $temArticle = $em->getRepository('ITVietSiteBundle:Article')->find($id);
+        //if isAdmin show
+        //if isOwner check isDeleted and show
+        if ($member->getId() == $temArticle->getMember()->getId()) {
+            $article = $em->getRepository('ITVietSiteBundle:Article')->findOneAsOwner($id);
+        } else {
+            $article = $em->getRepository('ITVietSiteBundle:Article')->findOneAsGuest($id);
+        }
+        //else check isDeleted, isActive and show
 
         if (!$article) {
            throw $this->createNotFoundException('Unable to find Article entity');
         }
+
+        $comments = $em->getRepository('ITVietSiteBundle:Comment')->getCommentByArticle($article->getId());
+
         return array(
           'article' => $article,
           'comments' => $comments,
+          'isMember' => $isMember,
         );
     }
 }
