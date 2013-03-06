@@ -60,7 +60,7 @@ class ArticleController extends BaseController
         $t = $this->get('translator');
 
         //only article belong to member
-        $article = $em->getRepository('ITVietSiteBundle:Article')->findOne($id, $member->getId());
+        $article = $em->getRepository('ITVietSiteBundle:Article')->findOneAsOwner($id);
 
         if (!$article) {
             throw $this->createNotFoundException('Article is not valid');

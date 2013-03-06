@@ -308,4 +308,14 @@ _member_article_list:
         _scheme: http
         _locale: en|vi
 
-
+_member_comment_create:
+    pattern: /{_locale}/member/comment/{article_id}/create
+    defaults: { _controller: ITVietSiteBundle:Member\Comment:create }
+    requirements:
+        _method: post
+        _locale: en
+_vi_member_comment_create:
+    pattern: /thanh-vien/binh-luan/{article_id}/tao
+    defaults: { _controller: ITVietSiteBundle:Member\Comment:create, _locale: vi }
+    requirements:
+        _method: post

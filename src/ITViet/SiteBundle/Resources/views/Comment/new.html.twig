@@ -1,10 +1,25 @@
+<script>
+<!--
+function checkForm() {
+  var strAlert = "";
+  strAlert = strAlert + VKCheckRequireField(document.getElementById("txtCmt"), "{% trans %}Please enter your comment{% endtrans %}!\n");
+
+  if(strAlert != "") {
+    alert(strAlert);
+    return false;
+  } else {
+    return true;
+  }
+}
+-->
+</script>
 {% if isMember %}
 {% set member = app.security.getToken().getUser() %}
 <img class="img-small" src="{{ member.getGravatar(32) }}" alt="Ava" />
 <div class="comment-body">
-  <form>
-    <textarea class="post-wall cmt" name=""></textarea>
-    <input type="submit" name="dang" value="Dang" />
+  <form action="{{ mlpath('_member_comment_create',{'article_id':article.id}) }}" method="post" name="frm">
+    <textarea class="post-wall cmt" name="txtCmt" id="txtCmt"></textarea>
+    <input type="submit" class="btn" name="dang" value="{% trans %}Post comment{% endtrans %}"  onclick="return checkForm();" />
   </form>
 </div>
 {% else %}

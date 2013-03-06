@@ -1,9 +1,9 @@
 <ul class="post-cmt">
   {% for comment in comments %}
   <li>
-    <div class="avatar"><a href="{{ mlpath('_member_public_show', {'id': article.member.id, 'name': article.member.fullNameSlug }) }}"><img class="img-small" src="{{ article.member.getGravatar(32) }}" alt="{{ article.member.fullName }}" /></a></div>
+    <div class="avatar"><a href="{{ mlpath('_member_public_show', {'id': comment.member.id, 'name': comment.member.fullNameSlug }) }}"><img class="img-small" src="{{ comment.member.getGravatar(32) }}" alt="{{ comment.member.fullName }}" /></a></div>
     <div class="comment-body">
-      <a href="{{ mlpath('_member_public_show', {'id': article.member.id, 'name': article.member.fullNameSlug }) }}">{{ article.member.fullName }}</a>
+      <a href="{{ mlpath('_member_public_show', {'id': comment.member.id, 'name': comment.member.fullNameSlug }) }}">{{ comment.member.fullName }}</a>
       {{ comment.content }}
       {% set timeAgo = comment.postedAt|timeAgo %}
       <p class="muted"><small>{{ timeAgo.difference }} {{ timeAgo.period|trans }} {% trans %}ago{% endtrans %}</small></p>
