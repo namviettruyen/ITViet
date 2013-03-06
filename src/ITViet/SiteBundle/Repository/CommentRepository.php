@@ -9,8 +9,11 @@ class CommentRepository extends EntityRepository
             SELECT c
             FROM ITVietSiteBundle:Comment c
             WHERE c.isActive = ?1
-            AND c.article = $article_id
-          ")->setParameter(1, true);
+            AND c.parentId = ?2
+            AND c.article = ?3
+            ")->setParameter(1, true)
+            ->setParameter(2, 0)
+            ->setParameter(3, $article_id);
 
         return $q->getResult();
     }

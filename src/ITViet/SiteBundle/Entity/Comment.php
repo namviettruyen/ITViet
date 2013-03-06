@@ -43,6 +43,10 @@ class Comment
      */
     private $postedAt;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $parentId = 0;
 
     /**
      * Get id
@@ -178,6 +182,13 @@ class Comment
         if (! $this->postedAt) {
             $this->postedAt = new \DateTime();
         }
+    }
+
+    public function getParentId() {
+        return $this->parentId;
+    }
+    public function setParentId($val) {
+        $this->parentId = $val;
     }
 
 }
