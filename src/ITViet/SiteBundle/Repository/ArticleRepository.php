@@ -37,7 +37,7 @@ class ArticleRepository extends EntityRepository
         if ($offset)
             $qb->setFirstResult($offset);
 
-        $qb->orderBy('a.postedAt', 'DESC');
+        $qb->orderBy('a.modifiedAt', 'DESC');
         return $qb->getQuery()->getResult();
     }
 
