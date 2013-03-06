@@ -6,7 +6,25 @@
       <a href="{{ mlpath('_member_public_show', {'id': comment.member.id, 'name': comment.member.fullNameSlug }) }}">{{ comment.member.fullName }}</a>
       {{ comment.content }}
       {% set timeAgo = comment.postedAt|timeAgo %}
-      <p class="muted"><small>{{ timeAgo.difference }} {{ timeAgo.period|trans }} {% trans %}ago{% endtrans %}</small></p>
+      <div class="muted"><small>{{ timeAgo.difference }} {{ timeAgo.period|trans }} {% trans %}ago{% endtrans %}</small></div>
+      <div id="box-{{ comment.id }}">
+        <div class="divRep label label-warning" onclick="$('#box-{{ comment.id }}').hide();$('#form-{{ comment.id }}').show();$('#txt-{{ comment.id }}').focus().elastic().trigger('update')">
+          {% trans %}Reply{% endtrans %}
+        </div>
+      </div>
+      <div id="form-{{ comment.id }}" style="display:none;">
+        {% if isMember %}
+          {% set member = app.security.getToken().getUser() %}
+        <form class="no-margin"><img class="img-small" src="{{ member.getGravatar(32) }}" alt="Ava" /><textarea class="post-wall cmt rep" id="txt-{{ comment.id }}" onblur="if(this.value=='') { $('#form-{{ comment.id }}').hide();$('#box-{{ comment.id }}').show(); }"></textarea>
+        </form>
+        {% else %}
+        <p class="muted">
+          <small>
+            {% trans with {'%href%': mlpath('_member_to_login')} %}You have to <a href="%href%">login</a> to post comment{% endtrans %}
+          </small>
+        </p>
+        {% endif %}
+      </div>
     </div>
   </li>
   {% endfor %}

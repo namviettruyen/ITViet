@@ -261,3 +261,15 @@ width: 420px;
 width: 390px;
 height: 100px;
 }
+.post-cmt li {
+overflow: hidden;
+margin-bottom: 8px;
+}
+.no-margin {
+margin: 0;
+}
+.post-wall.cmt.rep {
+margin: 0;
+height: 30px;
+width: 350px;
+}

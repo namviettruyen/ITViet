@@ -19,7 +19,7 @@ function checkForm() {
 <div class="comment-body">
   <form action="{{ mlpath('_member_comment_create',{'article_id':article.id}) }}" method="post" name="frm">
     <textarea class="post-wall cmt" name="txtCmt" id="txtCmt"></textarea>
-    <input type="submit" class="btn" name="dang" value="{% trans %}Post comment{% endtrans %}"  onclick="return checkForm();" />
+    <input type="submit" class="btn btn-primary" name="post" value="{% trans %}Post comment{% endtrans %}"  onclick="return checkForm();" />
   </form>
 </div>
 {% else %}
