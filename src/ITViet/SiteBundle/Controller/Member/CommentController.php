@@ -18,15 +18,45 @@ class CommentController extends BaseController
         }
 
         if ($request->getMethod() == 'POST') {
-            $content = $request->request->get('txtCmt');
+            $content = str_replace(array("\r\n","\r","\n"), "<br />", $request->request->get('txtCmt'));
 
             $comment = new Comment();
             $comment->setContent($content);
             $comment->setMember($member);
             $comment->setArticle($article);
+            $comment->increaseCountValue();
             $em->persist($comment);
             $em->flush();
             $this->get('session')->setFlash('success', $t->trans('Post new comment success'));
+            return $this->redirect($this->generateMlUrl('_article_show',array(
+              'id'=> $article->getId(),
+              'category'=> $article->getCategory()->getUrlPart(),
+              'urlPart'=> $article->getUrlPart() 
+            )));
+        }
+    }
+
+    public function createReplyAction($comment_id) {
+        $em = $this->get('doctrine.orm.entity_manager');
+        $request = $this->get('request');
+        $member = $this->get('security.context')->getToken()->getUser();
+        $comment = $em->getRepository('ITVietSiteBundle:Comment')->findOneById($comment_id);
+        $article = $comment->getArticle();
+
+        if (!$member) {
+            throw $this->createNotFoundException('You have to login first');
+        }
+
+        if ($request->getMethod() == 'POST') {
+            $content = str_replace(array("\r\n","\r","\n"), "<br />", $request->request->get('txtRep'));
+
+            $comment = new Comment();
+            $comment->setContent($content);
+            $comment->setMember($member);
+            $comment->setArticle($article);
+            $comment->setParentId($comment_id);
+            $em->persist($comment);
+            $em->flush();
             return $this->redirect($this->generateMlUrl('_article_show',array(
               'id'=> $article->getId(),
               'category'=> $article->getCategory()->getUrlPart(),

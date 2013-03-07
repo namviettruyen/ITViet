@@ -4,18 +4,34 @@
     <div class="avatar"><a href="{{ mlpath('_member_public_show', {'id': comment.member.id, 'name': comment.member.fullNameSlug }) }}"><img class="img-small" src="{{ comment.member.getGravatar(32) }}" alt="{{ comment.member.fullName }}" /></a></div>
     <div class="comment-body">
       <a href="{{ mlpath('_member_public_show', {'id': comment.member.id, 'name': comment.member.fullNameSlug }) }}">{{ comment.member.fullName }}</a>
-      {{ comment.content }}
+      &nbsp;{{ comment.content|raw }}
       {% set timeAgo = comment.postedAt|timeAgo %}
       <div class="muted"><small>{{ timeAgo.difference }} {{ timeAgo.period|trans }} {% trans %}ago{% endtrans %}</small></div>
+
+      {% for reply in comment.replies %}
+      <ul class="no-margin">
+        <li>
+          <div class="avatar"><a href="{{ mlpath('_member_public_show', {'id': reply.member.id, 'name': reply.member.fullNameSlug }) }}"><img class="img-small" src="{{ reply.member.getGravatar(32) }}" alt="{{ reply.member.fullName }}" /></a></div>
+          <div class="comment-body reply-body">
+            <a href="{{ mlpath('_member_public_show', {'id': reply.member.id, 'name': reply.member.fullNameSlug }) }}">{{ reply.member.fullName }}</a>
+            &nbsp;{{ reply.content|raw }}
+            {% set timeAgo = reply.postedAt|timeAgo %}
+            <div class="muted"><small>{{ timeAgo.difference }} {{ timeAgo.period|trans }} {% trans %}ago{% endtrans %}</small></div>
+        </li>
+      </ul>
+      {% endfor %}
+
       <div id="box-{{ comment.id }}">
-        <div class="divRep label label-warning" onclick="$('#box-{{ comment.id }}').hide();$('#form-{{ comment.id }}').show();$('#txt-{{ comment.id }}').focus().elastic().trigger('update')">
+        <div class="divRep label label-warning" onclick="$('#box-{{ comment.id }}').hide();$('#div-{{ comment.id }}').show();$('#txt-{{ comment.id }}').focus();">
           {% trans %}Reply{% endtrans %}
         </div>
       </div>
-      <div id="form-{{ comment.id }}" style="display:none;">
+      <div id="div-{{ comment.id }}" style="display:none;">
         {% if isMember %}
           {% set member = app.security.getToken().getUser() %}
-        <form class="no-margin"><img class="img-small" src="{{ member.getGravatar(32) }}" alt="Ava" /><textarea class="post-wall cmt rep" id="txt-{{ comment.id }}" onblur="if(this.value=='') { $('#form-{{ comment.id }}').hide();$('#box-{{ comment.id }}').show(); }"></textarea>
+        <form class="no-margin" id="frmReply-{{ comment.id }}" action="{{ mlpath('_member_reply_create', {'comment_id': comment.id}) }}" method="post">
+          <img class="img-small" src="{{ member.getGravatar(32) }}" alt="Ava" />
+          <textarea onkeypress="postReply(event, {{ comment.id }});" class="post-wall cmt rep" id="txt-{{ comment.id }}" onblur="if(this.value=='') { $('#div-{{ comment.id }}').hide();$('#box-{{ comment.id }}').show(); }" name="txtRep"></textarea>
         </form>
         {% else %}
         <p class="muted">

@@ -1,18 +1,4 @@
-<script>
-<!--
-function checkForm() {
-  var strAlert = "";
-  strAlert = strAlert + VKCheckRequireField(document.getElementById("txtCmt"), "{% trans %}Please enter your comment{% endtrans %}!\n");
 
-  if(strAlert != "") {
-    alert(strAlert);
-    return false;
-  } else {
-    return true;
-  }
-}
--->
-</script>
 {% if isMember %}
 {% set member = app.security.getToken().getUser() %}
 <img class="img-small" src="{{ member.getGravatar(32) }}" alt="Ava" />

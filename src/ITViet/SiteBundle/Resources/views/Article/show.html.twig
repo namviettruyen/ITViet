@@ -7,6 +7,50 @@
 {% endblock %}
 
 {% block maincontents %}
+<script>
+<!--
+function checkForm() {
+  var strAlert = "";
+  strAlert = strAlert + VKCheckRequireField(document.getElementById("txtCmt"), "{% trans %}Please enter your comment{% endtrans %}!\n");
+
+  if(strAlert != "") {
+    alert(strAlert);
+    return false;
+  } else {
+    return true;
+  }
+}
+
+function postReply(e, id) {
+  //document.getElementById('txt-hidden-' + id).value += String.fromCharCode(e.which);
+  if (e.keyCode == 13) {
+    if (e.shiftKey === true) {
+      //document.getElementById('txt-hidden-' + id).value += '<br>';
+    } else {
+      document.forms['frmReply-' + id].submit();
+    }
+  }
+}
+{#
+function postComment(e) {
+  if (e.keyCode == 8) {
+    for (var i = 0 ; i < document.getElementById('txt-hidden-comment').value.length; i++) {
+      if ()
+    }
+    document.getElementById('txt-hidden-comment').value = document.getElementById('txt-hidden-comment').value.substring(0, document.getElementById('txt-hidden-comment').value.length - 1);
+  } else {
+  document.getElementById('txt-hidden-comment').value += String.fromCharCode(e.which);
+}
+
+  if (e.keyCode == 13) {
+      document.getElementById('txt-hidden-comment').value += '<br>';
+  }
+}
+#}
+-->
+</script>
+
+
 <div class="clearfix">
 {% render 'ITVietSiteBundle:Layout:leftSideBar' with {'standalone': true, 'active': article.category.id} %}
   <div class="main-wall">

@@ -170,15 +170,14 @@ class Comment
         return $this->article;
     }
 
-    /**
-     * @ORM\PrePersist()
-     */
-    public function updateMetaData() {
-        $this->setPostedDateValue();
+    public function increaseCountValue() {
         $this->article->increaseCount();
     }
 
-    private function setPostedDateValue() {
+    /**
+     * @ORM\PrePersist()
+     */
+    public function setPostedDateValue() {
         if (! $this->postedAt) {
             $this->postedAt = new \DateTime();
         }

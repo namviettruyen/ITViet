@@ -319,3 +319,16 @@ _vi_member_comment_create:
     defaults: { _controller: ITVietSiteBundle:Member\Comment:create, _locale: vi }
     requirements:
         _method: post
+
+_member_reply_create:
+    pattern: /{_locale}/member/reply/{comment_id}/create
+    defaults: { _controller: ITVietSiteBundle:Member\Comment:createReply }
+    requirements:
+        _method: post
+        _locale: en
+_vi_member_reply_create:
+    pattern: /thanh-vien/tra-loi/{comment_id}/tao
+    defaults: { _controller: ITVietSiteBundle:Member\Comment:createReply, _locale: vi }
+    requirements:
+        _method: post
+
