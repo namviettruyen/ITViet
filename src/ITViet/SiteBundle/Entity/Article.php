@@ -341,4 +341,17 @@ class Article
     public function getCountComment() {
         return $this->countComment;
     }
+
+    /**
+     * @ORM\OneToOne(targetEntity="ArticleViewInfo", cascade={"all"}, fetch="LAZY")
+     * @ORM\JoinColumn(name="article_view_info_id", referencedColumnName="id")
+     */
+    protected $viewInfo;
+    public function getViewInfo() {
+        return $this->viewInfo;
+    }
+    public function setViewInfo($val) {
+        $this->viewInfo = $val;
+    }
+
 }

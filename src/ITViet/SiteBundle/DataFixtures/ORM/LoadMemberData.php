@@ -12,6 +12,7 @@ use ITViet\SiteBundle\Entity\MemberLoginInfo;
 use ITViet\SiteBundle\Entity\Category;
 use ITViet\SiteBundle\Entity\Article;
 use ITViet\SiteBundle\Entity\Comment;
+use ITViet\SiteBundle\Entity\ArticleViewInfo;
 
 class LoadMemberData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
@@ -41,7 +42,6 @@ class LoadMemberData extends AbstractFixture implements OrderedFixtureInterface,
 
             $logininfo = new MemberLoginInfo();
             $logininfo->setCount(0);
-
             $member->setLoginInfo($logininfo);
 
             $em->persist($logininfo);
@@ -81,6 +81,11 @@ class LoadMemberData extends AbstractFixture implements OrderedFixtureInterface,
             $article->setCategory($categories[$i % 4]);
             $article->setTitle('Bài viết Ấn tượng nhất'.$i);
             $article->setContent('<p>Nội dung bài viết, xin chào aos dsd sds dada  Nội dung bài viết Nội dung bài viết Nội dung bài viết Nội dung bài viết Nội dung bài viết Nội dung bài viết Nội dung bài viết Nội dung bài viết Nội</p> <p>dung bài viết Nội dung bài viết Nội dung bài viết Nội dung bài viết Nội dung bài viết Nội dung bài viết Nội dung bài viết Nội dung bài viết</p>');
+
+            $viewinfo = new ArticleViewInfo();
+            $viewinfo->setCount(0);
+            $article->setViewInfo($viewinfo);
+
             $em->persist($article);
             $articles[$i-1] = $article;
         }

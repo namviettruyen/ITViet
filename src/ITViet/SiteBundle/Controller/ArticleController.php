@@ -30,6 +30,9 @@ class ArticleController extends Controller
            throw $this->createNotFoundException('Unable to find Article entity');
         }
 
+        $em->getRepository('ITVietSiteBundle:ArticleViewInfo')->incrCount($article);
+        $em->flush();
+
         $comments = $em->getRepository('ITVietSiteBundle:Comment')->getCommentByArticle($article->getId());
 
         return array(

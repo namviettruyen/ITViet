@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormError;
 use ITViet\SiteBundle\Model\Paginator;
+use ITViet\SiteBundle\Entity\ArticleViewInfo;
 
 class ArticleController extends BaseController
 {
@@ -34,6 +35,11 @@ class ArticleController extends BaseController
             if ($form->isValid()) {
                 $em = $this->get('doctrine.orm.entity_manager');
                 $article->setMember($member);
+
+                $viewInfo = new ArticleViewInfo();
+                $viewInfo->setCount(0);
+                $article->setViewInfo($viewInfo);
+
                 $em->persist($article);
                 $em->flush();
                 $this->get('session')->setFlash('success', $t->trans('Post new article success'));
