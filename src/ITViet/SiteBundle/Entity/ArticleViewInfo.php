@@ -58,4 +58,10 @@ class ArticleViewInfo
     {
         return $this->count;
     }
+
+    /**
+     * @ORM\OneToMany(targetEntity="BaseLog", mappedBy="articleViewInfo")
+     */
+    private $baseLogs;
+
 }

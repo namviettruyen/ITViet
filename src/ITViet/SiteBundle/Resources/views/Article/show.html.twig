@@ -64,7 +64,7 @@ function postComment(e) {
       {% set timeAgo = article.postedAt|timeAgo %}
       <span class="label"><i class="icon-calendar icon-white"></i> {{ timeAgo.difference }} {{ timeAgo.period|trans }} {% trans %}ago{% endtrans %}</span>
       <span class="label"><i class="icon-pencil icon-white"></i> {{ article.countComment }} {% trans %}Comment{% endtrans %}</span>
-      <span class="label"><i class="icon-eye-open icon-white"></i> 3 luot xem</span>
+      <span class="label"><i class="icon-eye-open icon-white"></i> {{ article.viewInfo.count }} {% trans %}View{% endtrans %}</span>
     </div>{#end meta box#}
     <div class="post-content">
     {{ article.content|raw }}
