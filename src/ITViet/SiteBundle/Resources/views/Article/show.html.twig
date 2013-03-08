@@ -27,6 +27,8 @@ function postReply(e, id) {
     if (e.shiftKey === true) {
       //document.getElementById('txt-hidden-' + id).value += '<br>';
     } else {
+      $('#loading_animation').show();
+      document.getElementById('txt-' + id).readOnly = true;
       document.forms['frmReply-' + id].submit();
     }
   }
@@ -69,6 +71,7 @@ function postComment(e) {
     </div>
     <hr />
     {% include 'ITVietSiteBundle:Comment:list.html.twig' %}
+    <img id="loading_animation" class="post-reply" src="{{ asset('images/icon/ajax-loader.gif') }}" alt="processing..." />
     {% include 'ITVietSiteBundle:Comment:new.html.twig' %}
   </div>
 </div>

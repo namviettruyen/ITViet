@@ -18,7 +18,9 @@ class CommentController extends BaseController
         }
 
         if ($request->getMethod() == 'POST') {
-            $content = str_replace(array("\r\n","\r","\n"), "<br />", $request->request->get('txtCmt'));
+            $content = $request->request->get('txtCmt');
+            $content = htmlspecialchars($content);
+            $content = str_replace(array("\r\n","\r","\n"), "<br />", $content);
 
             $comment = new Comment();
             $comment->setContent($content);
@@ -48,7 +50,9 @@ class CommentController extends BaseController
         }
 
         if ($request->getMethod() == 'POST') {
-            $content = str_replace(array("\r\n","\r","\n"), "<br />", $request->request->get('txtRep'));
+            $content = $request->request->get('txtRep');
+            $content = htmlspecialchars($content);
+            $content = str_replace(array("\r\n","\r","\n"), "<br />", $content);
 
             $comment = new Comment();
             $comment->setContent($content);

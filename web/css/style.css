@@ -279,3 +279,6 @@ width: 375px;
 .post-cmt li ul {
 list-style: none outside none;
 }
+.post-reply {
+margin-top: -60px;
+}
