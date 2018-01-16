@@ -24,5 +24,5 @@ assetic:
 
 swiftmailer:
     transport: gmail
-    username: nam.luuduc@gmail.com
-    password: timdautimdau90
+    username: xxx
+    password: xxx
